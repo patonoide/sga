@@ -1,0 +1,40 @@
+h1
+  | New Record
+
+= form_for(@record) do |f|
+
+  - if @record.errors.any?
+
+    #error_explanation
+      h2
+        = pluralize(@record.errors.count, "error")
+        |  prohibited this record from being saved:
+      ul
+        - @record.errors.full_messages.each do |message|
+          li
+            = message
+
+  .form-group
+    = f.label 'Data e Horário'
+    #datetimepicker.input-group.date
+      = f.text_field :date, class:'form-control'
+      span.input-group-addon
+        span.glyphicon.glyphicon-calendar
+
+  .form-group
+    = f.label 'Núcleo'
+    = f.select :sector_id, 
+               Sector.all.map { |s| [s.name, s.id] }, 
+               { include_blank: 'Selecione o núcleo' },
+               { class: 'form-control' }
+
+  = f.submit 'Criar Ata', class:'btn btn-primary'
+
+= link_to 'Back', records_path
+
+javascript:
+  $(document).ready(function() {
+    $('#datetimepicker').datetimepicker({
+      locale: 'pt-br'
+    });
+  });
