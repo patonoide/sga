@@ -66,11 +66,9 @@ class RecordsController < ApplicationController
   # DELETE /records/1
   # DELETE /records/1.json
   def destroy
+    @sector = @record.sector
     @record.destroy
-    respond_to do |format|
-      format.html { redirect_to records_url, notice: 'Record was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    @records = @sector.records
   end
 
   private

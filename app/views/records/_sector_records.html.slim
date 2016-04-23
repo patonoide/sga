@@ -57,7 +57,8 @@
               td = link_to 'Editar', edit_record_path(record)
               td = link_to 'Excluir', record,
                                       method: :delete, 
-                                      data: { confirm: 'Tem certeza?' }
+                                      data: { confirm: 'Tem certeza?' },
+                                      remote: true
 
               td align="right"
                 = link_to 'Editar Pautas', edit_discussions_path(record), class:'btn btn-xs btn-primary'

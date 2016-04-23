@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get '/records/:id/edit_discussions' => 'records#edit_discussions', as: :edit_discussions
 
+  root 'records#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
