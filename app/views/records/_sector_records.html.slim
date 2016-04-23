@@ -3,7 +3,7 @@
   - if @records.blank?
     
     .col-sm-10
-      .alert.alert-danger
+      #no_records.alert.alert-danger
         | Não há atas para o núcleo selecionado.
 
   - else
@@ -17,17 +17,25 @@
   = form_tag('/records/new', remote: true) do
     
     = hidden_field_tag :sector_id, @sector.id
+
     .col-sm-2
       = submit_tag 'Criar Nova Ata', class:'btn btn-lg btn-success btn-block'
+
+  .col-sm-12
+    #form_basic_info style="padding-top: 5px"
 
   - unless @records.blank?
 
     .col-sm-12
+
       table.table
 
         thead
           tr
+            th Status
+            th Número
             th Data
+            th
             th
             th
 
@@ -36,10 +44,20 @@
           - @records.each do |record|
 
             tr
+
+              td
+                - if record.discussions.blank?
+                  span.label.label-danger
+                    | Incompleta
+                - else
+                  span.label.label-success
+                    | Completa
+              td = record.number
               td = record.date
               td = link_to 'Editar', edit_record_path(record)
               td = link_to 'Excluir', record,
                                       method: :delete, 
                                       data: { confirm: 'Tem certeza?' }
 
-#form_basic_info style="padding-top: 10px"
+              td align="right"
+                = link_to 'Editar Pautas', edit_discussions_path(record), class:'btn btn-xs btn-primary'

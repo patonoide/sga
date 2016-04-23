@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   post '/records/new' => 'records#new', as: :new_record
   post '/select_sector_records' => 'records#select_sector_records'
 
+  get '/records/:id/edit_discussions' => 'records#edit_discussions', as: :edit_discussions
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

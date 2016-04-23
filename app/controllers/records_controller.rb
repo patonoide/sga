@@ -1,6 +1,6 @@
 class RecordsController < ApplicationController
 
-  before_action :set_record, only: [:show, :edit, :update, :destroy]
+  before_action :set_record, only: [:show, :edit, :update, :destroy, :edit_discussions]
 
   # GET /records
   def index
@@ -26,20 +26,27 @@ class RecordsController < ApplicationController
   def edit
   end
 
+  def edit_members
+  end
+
+  def edit_discussions
+  end
+
   # POST /records
   # POST /records.json
   def create
-    @record = Record.new(record_params)
-    
-    respond_to do |format|
-      if @record.save
-        format.html { redirect_to @record, notice: 'Record was successfully created.' }
-        format.json { render :show, status: :created, location: @record }
-      else
-        format.html { render :new }
-        format.json { render json: @record.errors, status: :unprocessable_entity }
-      end
+    @sector = Sector.find(record_params[:sector_id])
+    last_number = @sector.records.try(:last).try(:number)
+
+    if last_number.nil?
+      number = 1
+    else
+      number = last_number + 1
     end
+    
+    @record = Record.create(record_params)
+    @record.update_attribute(:number, number)
+    @records = @sector.records
   end
 
   # PATCH/PUT /records/1
@@ -74,6 +81,6 @@ class RecordsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def record_params
-      params.require(:record).permit(:date, :sector_id)
+      params.require(:record).permit(:date, :sector_id, :number)
     end
 end
