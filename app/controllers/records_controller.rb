@@ -1,10 +1,15 @@
 class RecordsController < ApplicationController
+
   before_action :set_record, only: [:show, :edit, :update, :destroy]
 
   # GET /records
-  # GET /records.json
   def index
-    @records = Record.all
+  end
+
+  # POST /select_sector_records
+  def select_sector_records
+    @sector = Sector.find(params[:sector][:id])
+    @records = @sector.records
   end
 
   # GET /records/1
@@ -14,7 +19,7 @@ class RecordsController < ApplicationController
 
   # GET /records/new
   def new
-    @record = Record.new
+    @record = Record.new(sector_id: params[:sector_id])
   end
 
   # GET /records/1/edit
@@ -25,7 +30,7 @@ class RecordsController < ApplicationController
   # POST /records.json
   def create
     @record = Record.new(record_params)
-
+    
     respond_to do |format|
       if @record.save
         format.html { redirect_to @record, notice: 'Record was successfully created.' }

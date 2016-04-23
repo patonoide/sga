@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :records
+
+  resources :records, except: :new
+
+  post '/records/new' => 'records#new', as: :new_record
+  post '/select_sector_records' => 'records#select_sector_records'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
