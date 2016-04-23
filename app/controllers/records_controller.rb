@@ -1,5 +1,6 @@
 class RecordsController < ApplicationController
 
+  respond_to :html, :js
   before_action :set_record, only: [:show, :edit, :update, :destroy, :edit_discussions]
 
   # GET /records
@@ -52,14 +53,9 @@ class RecordsController < ApplicationController
   # PATCH/PUT /records/1
   # PATCH/PUT /records/1.json
   def update
-    respond_to do |format|
-      if @record.update(record_params)
-        format.html { redirect_to @record, notice: 'Record was successfully updated.' }
-        format.json { render :show, status: :ok, location: @record }
-      else
-        format.html { render :edit }
-        format.json { render json: @record.errors, status: :unprocessable_entity }
-      end
+    unless params[:record].nil?
+      @record.update(record_params)
+      @record.update_attribute(:updated_at, Time.now)
     end
   end
 
@@ -79,6 +75,10 @@ class RecordsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def record_params
-      params.require(:record).permit(:date, :sector_id, :number)
+      params.require(:record).permit(:date, 
+             :sector_id,
+             :number,
+             discussions_attributes: [:id, :name, :content, :_destroy])
     end
+
 end

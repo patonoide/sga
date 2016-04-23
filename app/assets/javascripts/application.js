@@ -15,6 +15,7 @@
 //= require bootstrap-sprockets
 //= require moment
 //= require bootstrap-datetimepicker
+//= require cocoon
 //= require locale
 //= require turbolinks
 //= require_tree .

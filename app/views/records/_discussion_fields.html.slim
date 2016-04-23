@@ -1,0 +1,16 @@
+.nested-fields
+
+  .form-group
+    = f.label 'Nome da Pauta'
+    = f.text_field :name, class: 'form-control'
+
+  .form-group
+    = f.label 'Discussão'
+    = f.text_area :content, class: 'form-control'
+  
+  = link_to_remove_association f, class: 'btn btn-warning' do
+    | Excluir Pauta
+    | &nbsp;&nbsp;
+    i.fa.fa-times
+
+  hr.divider

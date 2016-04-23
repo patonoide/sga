@@ -1,0 +1,14 @@
+= form_for @record, html: { id: 'discussions_form' }, remote: true do |f|
+
+  .col-sm-12
+    - if @record.discussions.blank?
+      .alert.alert-danger
+        | Não há pautas para esta reunião.
+        
+  .col-sm-12
+    = f.fields_for :discussions do |discussion|
+      = render 'discussion_fields', f: discussion
+    .links
+      .btn-group
+        = link_to_add_association 'Adicionar Pauta', f, :discussions, class: 'btn btn-success'
+        = link_to 'Voltar', records_path, class: 'btn btn-success'
