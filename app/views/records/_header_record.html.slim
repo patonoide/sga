@@ -1,0 +1,25 @@
+.row style="padding-top: 10px"
+
+  .col-sm-2.col-xs-12
+    = image_tag 'cjr.png', class: 'logo'
+
+  .col-sm-10.col-xs-12
+  
+    h1.text-right
+      = @record.number
+      | ª 
+      - case @record.sector.short_name
+        - when 'NOE'
+          | Reunião de Organização Empresarial
+        - when 'NDP'
+          | Reunião de Desenvolvimento e Pesquisa
+        - when 'NAM'
+          | Reunião de Atendimento e Marketing
+        - when 'NUT'
+          | Reunião de Talentos
+        - when 'PC'
+          | Reunião do Pequeno Conselho
+        - when 'CJR'
+          | Reunião Geral
+
+hr.divider

@@ -1,33 +1,16 @@
-h2
-  = @record.number
-  | ª 
-  - case @record.sector.short_name
-    - when 'NOE'
-      | Reunião de Organização Empresarial
-    - when 'NDP'
-      | Reunião de Desenvolvimento e Pesquisa
-    - when 'NAM'
-      | Reunião de Atendimento e Marketing
-    - when 'NUT'
-      | Reunião de Talentos
-    - when 'PC'
-      | Reunião do Pequeno Conselho
-    - when 'CJR'
-      | Reunião Geral
+= render 'header_record'
 
-hr.divider
+.row
 
-  .row
+  .col-sm-10.col-xs-12
+    .alert.alert-info
+      #updated_at
+        = render 'updated_at'
 
-    .col-sm-10
-      .alert.alert-info
-        #updated_at
-          = render 'updated_at'
+  .col-sm-2.col-xs-12 style="padding-bottom: 10px"
+    = button_tag type: "submit", class: "btn btn-primary btn-block btn-lg", form: 'discussions_form' do
+      i.fa.fa-check
+      | &nbsp;&nbsp;Atualizar
 
-    .col-sm-2
-      = button_tag type: "submit", class: "btn btn-primary btn-block btn-lg", form: 'discussions_form' do
-        i.fa.fa-check
-        | &nbsp;&nbsp;Atualizar
-        
-    #discussions
-      = render 'discussions'
+  #discussions 
+    = render 'discussions'
