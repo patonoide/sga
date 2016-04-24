@@ -1,12 +1,23 @@
 .row style="padding-top: 10px"
-
+  
   .col-sm-2.col-xs-12
-    = image_tag 'cjr.png', class: 'logo'
+    
+    .visible-xs
+      .text-center
+        = image_tag 'cjr.png', class: 'logo'
+
+    .hidden-xs
+      = image_tag 'cjr.png', class: 'logo'
 
   .col-sm-10.col-xs-12
   
-    h1.text-right
-      | Atas da CJR
+    .visible-xs
+      h1.text-center
+        | Atas da CJR
+
+    .hidden-xs
+      h1.text-right
+        | Atas da CJR
 
 hr.divider
 
@@ -14,12 +25,13 @@ hr.divider
 
   = form_tag('/select_sector_records', remote: true) do
     
-    .col-sm-9.col-xs-6
+    .col-sm-9.col-xs-7
       = collection_select :sector, :id, Sector.all, 
                           :id, :name, { prompt: false, 
                                         selected: session[:sector_id] },
                           class:'form-control'
-    .col-sm-3.col-xs-6
+
+    .col-sm-3.col-xs-5
       = button_tag type: "submit", class: "btn btn-primary btn-block" do
         i.fa.fa-search
         | &nbsp;&nbsp;Buscar atas 

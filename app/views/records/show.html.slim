@@ -3,10 +3,18 @@
 .row
 
   .col-sm-12
-    strong
-      | Data e hora da reunião: 
-    = @record.date
-    br
+
+    .visible-xs
+      .text-center
+        strong
+          | Data e hora da reunião: 
+        = @record.date
+
+    .hidden-xs
+      strong
+        | Data e hora da reunião: 
+      = @record.date
+
     .text-success
       = render 'updated_at'
 

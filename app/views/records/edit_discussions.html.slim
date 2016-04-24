@@ -7,10 +7,17 @@
       #updated_at
         = render 'updated_at'
 
-  .col-sm-2.col-xs-12 style="padding-bottom: 10px"
-    = button_tag type: "submit", class: "btn btn-primary btn-block btn-lg", form: 'discussions_form' do
-      i.fa.fa-check
-      | &nbsp;&nbsp;Atualizar
+  .col-sm-2.col-xs-12 style="padding-bottom: 20px"
+
+    .visible-xs
+      = button_tag type: "submit", class: "btn btn-primary btn-block", form: 'discussions_form' do
+        i.fa.fa-check
+        | &nbsp;&nbsp;Atualizar  
+
+    .hidden-xs
+      = button_tag type: "submit", class: "btn btn-primary btn-block btn-lg", form: 'discussions_form' do
+        i.fa.fa-check
+        | &nbsp;&nbsp;Atualizar
 
   #discussions 
     = render 'discussions'

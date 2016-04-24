@@ -15,23 +15,8 @@
  *= require_self
  */
 
-@import 'bootstrap-sprockets';
-@import 'bootstrap';
-@import 'checkbox';
-
-@import url('https://fonts.googleapis.com/css?family=Lobster+Two');
-
-body {
-  padding-bottom: 50px;
-}
-
-h1, h2, h3, h4 {
-  font-family: 'Lobster Two';
-  color: #515151;
-}
-
-.logo {
-  height: 70px;
-  width: auto;
-  padding: 5px;
-}
+@import 'base/index';
+@import 'layouts/index';
+@import 'modules/index';
+@import 'states/index';
+@import 'themes/index';

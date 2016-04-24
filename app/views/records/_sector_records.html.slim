@@ -24,23 +24,26 @@
     = hidden_field_tag :sector_id, @sector.id
 
     .col-sm-2 style="padding-bottom: 10px"
-      = submit_tag 'Criar Nova Ata', class:'btn btn-lg btn-success btn-block'
+      .visible-xs
+        = submit_tag 'Criar Nova Ata', class:'btn btn-success btn-block'
+      .hidden-xs
+        = submit_tag 'Criar Nova Ata', class:'btn btn-lg btn-success btn-block'
 
   .col-sm-12
     #form_basic_info style="padding-top: 5px"
-
+  
   - unless @sector.records.blank?
-
+    
     .col-sm-12
 
-      table.table.table-responsive
+      table.table#sector_records_table
 
         thead
           tr
             th Status
             th Número
-            th Data
             th Ata
+            th Data
             th
 
         tbody
@@ -58,27 +61,40 @@
                     | Completa
                     
               td = record.number
-              td = record.date
               td = link_to 'Visualizar Ata', record
+              td = traduz_data_e_hora record.date.to_time
 
               td align="right"
 
                 .btn-group
 
-                  = link_to edit_record_path(record), class:'btn btn-sm btn-default', remote: true do
+                  = link_to edit_record_path(record),
+                    class:'btn btn-sm btn-default',
+                    title:'Editar Ata', remote: true do
                     i.fa.fa-pencil
-                    | &nbsp;&nbsp; Editar Ata
 
-                  = link_to edit_discussions_path(record), class:'btn btn-sm btn-default' do
+                  = link_to edit_discussions_path(record),
+                    class:'btn btn-sm btn-default',
+                    title:'Editar Pautas' do
                     i.fa.fa-list-alt
-                    | &nbsp;&nbsp; Editar Pautas
 
-                  = link_to edit_users_path(record), class:'btn btn-sm btn-default' do
+                  = link_to edit_users_path(record),
+                    class:'btn btn-sm btn-default',
+                    title:'Editar Membros' do
                     i.fa.fa-user
-                    | &nbsp;&nbsp; Editar Membros
 
-                  = link_to record, method: :delete, 
-                                    data: { confirm: 'Você tem certeza?' }, 
-                                    remote: true, class:'btn btn-sm btn-default' do
+                  = link_to record,
+                    method: :delete,
+                    data: { confirm: 'Você tem certeza?' },
+                    remote: true, class:'btn btn-sm btn-default',
+                    title: 'Excluir Ata' do
                     i.fa.fa-times
-                    | &nbsp;&nbsp; Excluir
+
+/ dom: '<"top">rt<"pull-left"f><"pull-right"p><"clear">',
+javascript:
+  $(document).ready( function () {
+    $('#sector_records_table').DataTable({
+      "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json"},
+      responsive: true
+    });
+  } );
