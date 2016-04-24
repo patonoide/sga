@@ -42,16 +42,7 @@ class RecordsController < ApplicationController
   # POST /records.json
   def create
     @sector = Sector.find(record_params[:sector_id])
-    last_number = @sector.records.try(:last).try(:number)
-
-    if last_number.nil?
-      number = 1
-    else
-      number = last_number + 1
-    end
-    
     @record = Record.create(record_params)
-    @record.update_attribute(:number, number)
     @records = @sector.records
   end
 

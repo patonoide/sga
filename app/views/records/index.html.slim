@@ -13,7 +13,9 @@ hr.divider
                                         selected: session[:sector_id] },
                           class:'form-control'
     .col-sm-3.col-xs-6
-      = submit_tag 'Buscar Atas', class:'btn btn-primary btn-block'
+      = button_tag type: "submit", class: "btn btn-primary btn-block" do
+        i.fa.fa-search
+        | &nbsp;&nbsp;Buscar atas 
 
 #sector_records style="padding-top: 20px"
   - unless session[:sector_id].nil?

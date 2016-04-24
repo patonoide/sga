@@ -25,7 +25,9 @@ hr.divider
           = render 'updated_at'
 
     .col-sm-2
-      = submit_tag 'Atualizar', class: 'btn btn-primary btn-block btn-lg', form: 'users_form'
-    
+      = button_tag type: "submit", class: "btn btn-primary btn-block btn-lg", form: 'users_form' do
+        i.fa.fa-check
+        | &nbsp;&nbsp;Atualizar
+
     #users
       = render 'users'

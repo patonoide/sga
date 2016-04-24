@@ -3,7 +3,8 @@
   .col-sm-12
     - if @record.discussions.blank?
       .alert.alert-danger
-        | Não há pautas para esta reunião.
+        i.fa.fa-exclamation-circle
+        | &nbsp;&nbsp; Não há pautas para esta reunião.
         
   .col-sm-12
     = f.fields_for :discussions do |discussion|
