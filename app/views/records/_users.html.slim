@@ -1,0 +1,26 @@
+.col-sm-12
+
+  = form_for @record, html: { id: 'users_form' }, remote: true do |f|
+      
+    .checkbox
+      input type="checkbox" id="check_all"
+      label for="check_all"
+        | Marcar todos os membros
+    
+    hr.divider
+
+    = f.collection_check_boxes :user_ids, User.all, :id, :email do |b|
+
+        .checkbox
+          = b.check_box
+          = b.label do
+            = b.object.name
+  
+  br
+  
+  = link_to 'Voltar', records_path, class:'btn btn-primary'
+
+javascript:
+  $("#check_all").change(function () {
+    $("input:checkbox").prop('checked', $(this).prop("checked"));
+  });

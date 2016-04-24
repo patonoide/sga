@@ -8,8 +8,13 @@ hr.divider
   = form_tag('/select_sector_records', remote: true) do
     
     .col-sm-9.col-xs-6
-      = collection_select :sector, :id, Sector.all, :id, :name, {}, class:'form-control'
+      = collection_select :sector, :id, Sector.all, 
+                          :id, :name, { prompt: false, 
+                                        selected: session[:sector_id] },
+                          class:'form-control'
     .col-sm-3.col-xs-6
       = submit_tag 'Buscar Atas', class:'btn btn-primary btn-block'
 
 #sector_records style="padding-top: 20px"
+  - unless session[:sector_id].nil?
+    = render 'sector_records', sector: @sector = Sector.find(session[:sector_id])

@@ -1,6 +1,6 @@
 .row
 
-  - if @records.blank?
+  - if @sector.records.blank?
     
     .col-sm-10
       #no_records.alert.alert-danger
@@ -11,7 +11,7 @@
     .col-sm-10
       .alert.alert-info
         | Há 
-        = @records.count
+        = @sector.records.count
         |  atas para o núcleo selecionado.
 
   = form_tag('/records/new', remote: true) do
@@ -24,7 +24,7 @@
   .col-sm-12
     #form_basic_info style="padding-top: 5px"
 
-  - unless @records.blank?
+  - unless @sector.records.blank?
 
     .col-sm-12
 
@@ -41,12 +41,12 @@
 
         tbody
 
-          - @records.each do |record|
+          - @sector.records.each do |record|
 
             tr
 
               td
-                - if record.discussions.blank?
+                - if record.discussions.blank? or record.users.blank?
                   span.label.label-danger
                     | Incompleta
                 - else
@@ -62,3 +62,6 @@
 
               td align="right"
                 = link_to 'Editar Pautas', edit_discussions_path(record), class:'btn btn-xs btn-primary'
+
+              td align="right"
+                = link_to 'Editar Membros', edit_users_path(record), class:'btn btn-xs btn-primary'

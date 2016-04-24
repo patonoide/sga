@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   resources :records, except: :new
 
   post '/records/new' => 'records#new', as: :new_record
   post '/select_sector_records' => 'records#select_sector_records'
 
   get '/records/:id/edit_discussions' => 'records#edit_discussions', as: :edit_discussions
+  get '/records/:id/edit_users' => 'records#edit_users', as: :edit_users
 
   root 'records#index'
 

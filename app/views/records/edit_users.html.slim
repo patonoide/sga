@@ -1,0 +1,31 @@
+h2
+  = @record.number
+  | ª 
+  - case @record.sector.short_name
+    - when 'NOE'
+      | Reunião de Organização Empresarial
+    - when 'NDP'
+      | Reunião de Desenvolvimento e Pesquisa
+    - when 'NAM'
+      | Reunião de Atendimento e Marketing
+    - when 'NUT'
+      | Reunião de Talentos
+    - when 'PC'
+      | Reunião do Pequeno Conselho
+    - when 'CJR'
+      | Reunião Geral
+
+hr.divider
+
+  .row
+
+    .col-sm-10
+      .alert.alert-info
+        #updated_at
+          = render 'updated_at'
+
+    .col-sm-2
+      = submit_tag 'Atualizar', class: 'btn btn-primary btn-block btn-lg', form: 'users_form'
+    
+    #users
+      = render 'users'

@@ -1,7 +1,12 @@
 class RecordsController < ApplicationController
 
   respond_to :html, :js
-  before_action :set_record, only: [:show, :edit, :update, :destroy, :edit_discussions]
+  before_action :set_record, only: [:show, 
+                                    :edit, 
+                                    :update, 
+                                    :destroy, 
+                                    :edit_users, 
+                                    :edit_discussions]
 
   # GET /records
   def index
@@ -10,7 +15,7 @@ class RecordsController < ApplicationController
   # POST /select_sector_records
   def select_sector_records
     @sector = Sector.find(params[:sector][:id])
-    @records = @sector.records
+    session[:sector_id] = @sector.id
   end
 
   # GET /records/1
@@ -27,7 +32,7 @@ class RecordsController < ApplicationController
   def edit
   end
 
-  def edit_members
+  def edit_users
   end
 
   def edit_discussions
@@ -78,6 +83,7 @@ class RecordsController < ApplicationController
       params.require(:record).permit(:date, 
              :sector_id,
              :number,
+             user_ids: [],
              discussions_attributes: [:id, :name, :content, :_destroy])
     end
 
