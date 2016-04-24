@@ -40,8 +40,7 @@
             th Status
             th Número
             th Data
-            th
-            th
+            th Ata
             th
 
         tbody
@@ -60,14 +59,26 @@
                     
               td = record.number
               td = record.date
-              td = link_to 'Editar', edit_record_path(record), remote: true
-              td = link_to 'Excluir', record,
-                                      method: :delete, 
-                                      data: { confirm: 'Tem certeza?' },
-                                      remote: true
+              td = link_to 'Visualizar Ata', record
 
               td align="right"
-                = link_to 'Editar Pautas', edit_discussions_path(record), class:'btn btn-xs btn-primary'
 
-              td align="right"
-                = link_to 'Editar Membros', edit_users_path(record), class:'btn btn-xs btn-primary'
+                .btn-group
+
+                  = link_to edit_record_path(record), class:'btn btn-sm btn-default', remote: true do
+                    i.fa.fa-pencil
+                    | &nbsp;&nbsp; Editar Ata
+
+                  = link_to edit_discussions_path(record), class:'btn btn-sm btn-default' do
+                    i.fa.fa-list-alt
+                    | &nbsp;&nbsp; Editar Pautas
+
+                  = link_to edit_users_path(record), class:'btn btn-sm btn-default' do
+                    i.fa.fa-user
+                    | &nbsp;&nbsp; Editar Membros
+
+                  = link_to record, method: :delete, 
+                                    data: { confirm: 'Você tem certeza?' }, 
+                                    remote: true, class:'btn btn-sm btn-default' do
+                    i.fa.fa-times
+                    | &nbsp;&nbsp; Excluir

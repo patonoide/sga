@@ -19,6 +19,12 @@
 @import 'bootstrap';
 @import 'checkbox';
 
+@import url('https://fonts.googleapis.com/css?family=Lobster+Two');
+
 body {
   padding-bottom: 50px;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Lobster Two';
 }

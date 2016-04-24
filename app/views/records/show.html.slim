@@ -1,9 +1,90 @@
-p#notice
-  = notice
-p
-  strong
-    | Date:
-  = @record.date
-= link_to 'Edit', edit_record_path(@record)
-|  | 
-= link_to 'Back', records_path
+h2
+  = @record.number
+  | ª 
+  - case @record.sector.short_name
+    - when 'NOE'
+      | Reunião de Organização Empresarial
+    - when 'NDP'
+      | Reunião de Desenvolvimento e Pesquisa
+    - when 'NAM'
+      | Reunião de Atendimento e Marketing
+    - when 'NUT'
+      | Reunião de Talentos
+    - when 'PC'
+      | Reunião do Pequeno Conselho
+    - when 'CJR'
+      | Reunião Geral
+
+hr.divider
+
+  .row
+
+    .col-sm-12
+      strong
+        | Data e hora da reunião: 
+      = @record.date
+      br
+      = render 'updated_at'
+  
+  hr.divider
+
+  .row
+    
+    .col-sm-12
+      h3 Membros
+
+    .col-sm-12 style="padding-top: 10px"
+    
+      - if @record.users.blank?
+
+        .alert.alert-danger
+          i.fa.fa-exclamation-circle
+          | &nbsp;&nbsp; Não há membros para esta reunião.
+
+      - else
+
+        table.table
+
+          thead
+            tr
+              th Membro
+              th Email
+
+          tbody
+
+            - @record.users.each do |user|
+
+              tr
+                td = user.name
+                td = user.email
+  .row
+  
+    .col-sm-12
+      h3 Pautas
+
+    .col-sm-12 style="padding-top: 10px"
+
+      - if @record.discussions.blank?
+
+        .alert.alert-danger
+          i.fa.fa-exclamation-circle
+          | &nbsp;&nbsp; Não há pautas para esta reunião.       
+
+      - else
+
+        table.table
+
+          thead
+            tr
+              th Nome
+              th Discussão
+
+          tbody
+
+            - @record.discussions.each do |discussion|
+
+              tr
+                td = discussion.name
+                td.text-justify = discussion.content
+
+= link_to 'Voltar', records_path, class:'btn btn-primary'
