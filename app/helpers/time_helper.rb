@@ -1,5 +1,13 @@
 module TimeHelper
 
+  def traduz_para_nome_de_arquivo(time)
+    unless time.nil?
+      "#{time.strftime("%d")}_de_#{traduz_mes(time.strftime("%B"))}_de_#{time.strftime("%Y")}"
+    else
+      "undefined"
+    end
+  end
+
   def traduz_data_e_hora(time)
     unless time.nil?
       "#{time.strftime("%d")} de #{traduz_mes(time.strftime("%B"))} de #{time.strftime("%Y")} às #{time.strftime("%T")}"

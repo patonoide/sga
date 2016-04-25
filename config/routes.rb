@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get '/records/:id/edit_discussions' => 'records#edit_discussions', as: :edit_discussions
   get '/records/:id/edit_users' => 'records#edit_users', as: :edit_users
 
+  get '/records/:id/download' => 'records#download', as: :download
+
   root 'records#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

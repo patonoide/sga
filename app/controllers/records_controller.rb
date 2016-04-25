@@ -5,7 +5,8 @@ class RecordsController < ApplicationController
                                     :edit, 
                                     :update, 
                                     :destroy, 
-                                    :edit_users, 
+                                    :download,
+                                    :edit_users,
                                     :edit_discussions]
 
   # GET /records
@@ -16,6 +17,11 @@ class RecordsController < ApplicationController
   def select_sector_records
     @sector = Sector.find(params[:sector][:id])
     session[:sector_id] = @sector.id
+  end
+
+  # GET /records/1/download
+  def download
+    send_file view_context.download_record(@record)
   end
 
   # GET /records/1
