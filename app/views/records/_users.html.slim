@@ -2,7 +2,7 @@
 
   = form_for @record, html: { id: 'users_form' }, remote: true do |f|
       
-    .checkbox
+    .checkbox.checkbox-success
       input type="checkbox" id="check_all"
       label for="check_all"
         | Marcar todos os membros
@@ -11,7 +11,7 @@
 
     = f.collection_check_boxes :user_ids, User.all, :id, :email do |b|
 
-        .checkbox
+        .checkbox.checkbox-primary
           = b.check_box
           = b.label do
             = b.object.name

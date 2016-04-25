@@ -1,4 +1,7 @@
+@import "bootstrap-sprockets";
+@import "bootswatch/sandstone/variables";
+@import "bootstrap";
+@import "bootswatch/sandstone/bootswatch";
+
 @import 'bases';
-@import 'bootstrap-sprockets';
-@import 'bootstrap';
 @import 'normalize';

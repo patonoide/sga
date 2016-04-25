@@ -63,20 +63,14 @@ hr.divider
         | &nbsp;&nbsp; Não há pautas para esta reunião.       
 
     - else
+      
+      - @record.discussions.each do |discussion|
 
-      table.table
-
-        thead
-          tr
-            th Nome
-            th Discussão
-
-        tbody
-
-          - @record.discussions.each do |discussion|
-
-            tr
-              td = discussion.name
-              td.text-justify = discussion.content
+        .panel.panel-default
+          .panel-heading
+            = discussion.name
+          .panel-body
+            .text-justify
+              = discussion.content
 
 = link_to 'Voltar', records_path, class:'btn btn-primary'

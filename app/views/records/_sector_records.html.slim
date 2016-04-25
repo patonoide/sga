@@ -2,14 +2,14 @@
 
   - if @sector.records.blank?
     
-    .col-sm-10
+    .col-sm-9
       #no_records.alert.alert-danger
         i.fa.fa-exclamation-circle
         | &nbsp;&nbsp; Não há atas para o núcleo selecionado.
 
   - else
     
-    .col-sm-10
+    .col-sm-9
       .alert.alert-info
         | Há 
         = @sector.records.count
@@ -23,11 +23,10 @@
     
     = hidden_field_tag :sector_id, @sector.id
 
-    .col-sm-2 style="padding-bottom: 10px"
-      .visible-xs
-        = submit_tag 'Criar Nova Ata', class:'btn btn-success btn-block'
-      .hidden-xs
-        = submit_tag 'Criar Nova Ata', class:'btn btn-lg btn-success btn-block'
+    .col-sm-3 style="padding-bottom: 10px"
+      = button_tag type: 'submit', class: 'btn btn-success btn-block', style: 'margin-top: 3px' do
+        i.fa.fa-plus
+        | &nbsp;&nbsp;&nbsp;Criar Nova Ata
 
   .col-sm-12
     #form_basic_info style="padding-top: 5px"
