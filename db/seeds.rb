@@ -1,3 +1,4 @@
+Status.destroy_all
 RecordUser.destroy_all
 Discussion.destroy_all
 Record.destroy_all
@@ -10,8 +11,12 @@ nucleos = [{ name: 'Núcleo de Organização Empresarial', short_name: 'NOE' },
            { name: 'Núcleo de Talentos', short_name: 'NUT'},
            { name: 'Pequeno Conselho', short_name: 'PC'},
            { name: 'Empresa Júnior de Computação', short_name: 'CJR'}]
-
+           
 Sector.create(nucleos)
+
+status = [{ name: 'Presente' }, { name: 'Falta' }, { name: 'Falta Justificada' } ]
+
+Status.create(status)
 
 for i in 1..10
   User.create(name: 'Membro ' + i.to_s, email: 'membro' + i.to_s + '@cjr.org.br', password: 'teste123')

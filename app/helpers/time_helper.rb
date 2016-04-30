@@ -1,48 +1,19 @@
 module TimeHelper
 
-  def traduz_para_nome_de_arquivo(time)
-    unless time.nil?
-      "#{time.strftime("%d")}_de_#{traduz_mes(time.strftime("%B"))}_de_#{time.strftime("%Y")}"
-    else
-      "undefined"
-    end
+  def traduz_mes(mes)
+    meses = { "January" => 'janeiro', "February" => 'fevereiro', "March" => 'março',
+              "April" => 'abril', "May" => 'maio', "June" => 'junho', "July" => 'julho',
+              "August" => 'agosto', "September" => 'setembro', "October" => 'outubro',
+              "November" => 'novembro', "December" => 'dezembro' }
+    meses[mes]
   end
 
   def traduz_data_e_hora(time)
-    unless time.nil?
-      "#{time.strftime("%d")} de #{traduz_mes(time.strftime("%B"))} de #{time.strftime("%Y")} às #{time.strftime("%T")}"
-    else
-      "Atualizar Data e Hora"
-    end
+    "#{time.strftime("%d")} de #{traduz_mes(time.strftime("%B"))} de #{time.strftime("%Y")} às #{time.strftime("%T")}" unless time.nil?
   end
 
-  def traduz_mes(mes)
-    case mes
-    when "January"
-      "janeiro"
-    when "February"
-      "fevereiro"
-    when "March"
-      "março"
-    when "April"
-      "abril"
-    when "May"
-      "maio"
-    when "June"
-      "junho"
-    when "July"
-      "julho"
-    when "August"
-      "agosto"
-    when "September"
-      "setembro"
-    when "October"
-      "outubro"
-    when "November"
-      "novembro"
-    when "December"
-      "dezembro"
-    end
+  def traduz_para_nome_de_arquivo(time)
+    "#{time.strftime("%d")}_de_#{traduz_mes(time.strftime("%B"))}_de_#{time.strftime("%Y")}" unless time.nil?
   end
 
 end

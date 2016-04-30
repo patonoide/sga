@@ -28,9 +28,7 @@
       .form-group
         = f.label 'Reunião de nº'
         = f.number_field :number, class:'form-control', required: true
-      
-      = f.hidden_field :sector_id, value: @record.sector_id
-
+    
   / Membros
   .row
     
@@ -40,45 +38,24 @@
     .col-sm-12
       hr.divider
 
-    .col-sm-12 style="padding-top: 10px"
-    
-      - if @record.users.blank?
+  .row
 
-        .alert.alert-danger
-          i.fa.fa-exclamation-circle
-          | &nbsp;&nbsp; Não há membros para esta reunião.
+    .col-sm-12
+      = f.fields_for :record_users do |record_user|
+        = render 'record_user_fields', f: record_user
+      .links
+        = link_to_add_association 'Adicionar Membro', f, :record_users, class: 'btn btn-success'
 
-      - else
-
-        table.table
-
-          thead
-            tr
-              th Membro
-              th Email
-
-          tbody
-
-            - @record.users.each do |user|
-
-              tr
-                td = user.name
-                td = user.email
 
   / Pautas
   .row
 
-    .col-sm-12
-      h3 Pautas
+    div style="margin-top: 30px"
+      .col-sm-12
+        h3 Pautas
     
     .col-sm-12
       hr.divider
-        
-    .col-sm-12.col-xs-12
-      - if @record.discussions.blank?
-        .alert.alert-danger
-          i.fa.fa-exclamation-circle
-          | &nbsp;&nbsp; Não há pautas para esta reunião.
         
     .col-sm-12
       = f.fields_for :discussions do |discussion|
@@ -87,12 +64,12 @@
         = link_to_add_association 'Adicionar Pauta', f, :discussions, class: 'btn btn-success'
 
   / Submit e voltar
-  .row style="margin-top: 20px"
-    
-    .col-sm-12
-      .btn-group
-        = f.submit 'Salvar', class:'btn btn-primary'
-        = link_to 'Voltar', records_path, class:'btn btn-primary'
+  .row
+    div style="margin-top: 40px"
+      .col-sm-12
+        .btn-group
+          = f.submit 'Salvar', class:'btn btn-primary'
+          = link_to 'Voltar', records_path, class:'btn btn-primary'
 
 javascript:
   $(document).ready(function() {

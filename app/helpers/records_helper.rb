@@ -8,7 +8,7 @@ module RecordsHelper
     nucleo = ata.sector.short_name
     membros = ata.users
     data = traduz_para_nome_de_arquivo(ata.date.to_time)
-
+    
     case nucleo
       when 'NOE'
         nome = "Reunião de Organização Empresarial"

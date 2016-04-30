@@ -30,6 +30,14 @@ class RecordsController < ApplicationController
   # GET /records/new
   def new
     @sector = Sector.find(params[:sector_id])
+    records = @sector.records
+
+    unless records.blank?
+      @number = records.last.number + 1
+    else
+      @number = 1
+    end
+
     @record = Record.new(sector_id: params[:sector_id])
   end
 
@@ -56,6 +64,7 @@ class RecordsController < ApplicationController
   def update
     respond_to do |format|
       if @record.update_attributes(record_params)
+        @record.update_attribute(:updated_at, Time.now)
         format.html { redirect_to record_path(@record), notice: 'A ata foi atualizada com sucesso!' }
       end
     end
@@ -80,7 +89,7 @@ class RecordsController < ApplicationController
       params.require(:record).permit(:date, 
              :sector_id,
              :number,
-             record_users_attributes: [:id, :user_id, :_destroy],
+             record_users_attributes: [:id, :user_id, :status_id, :_destroy],
              discussions_attributes: [:id, :name, :content, :_destroy])
     end
 

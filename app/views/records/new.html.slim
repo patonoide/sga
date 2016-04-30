@@ -29,7 +29,7 @@
       
       .form-group
         = f.label 'Reunião de nº'
-        = f.number_field :number, class:'form-control', required: true
+        = f.number_field :number, value: @number, class:'form-control', required: true
       
       = f.hidden_field :sector_id, value: @record.sector_id
 
@@ -42,10 +42,13 @@
     .col-sm-12
       hr.divider
 
+  .row
+
     .col-sm-12
       = f.fields_for :record_users do |record_user|
         = render 'record_user_fields', f: record_user
-      = link_to_add_association 'Adicionar Membro', f, :record_users, class: 'btn btn-success'
+      .links
+        = link_to_add_association 'Adicionar Membro', f, :record_users, class: 'btn btn-success'
 
   / Pautas
   .row
