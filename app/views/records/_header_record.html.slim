@@ -14,38 +14,44 @@
     h1
       .visible-xs
         .text-center
-          = @record.number
-          | ª 
-          - case @record.sector.short_name
-            - when 'NOE'
-              | Reunião de Organização Empresarial
-            - when 'NDP'
-              | Reunião de Desenvolvimento e Pesquisa
-            - when 'NAM'
-              | Reunião de Atendimento e Marketing
-            - when 'NUT'
-              | Reunião de Talentos
-            - when 'PC'
-              | Reunião do Pequeno Conselho
-            - when 'CJR'
-              | Reunião Geral
+          - if @record.number.nil?
+            | Nova Ata de Reunião
+          - else
+            = @record.number
+            | ª 
+            - case @record.sector.short_name
+              - when 'NOE'
+                | Reunião de Organização Empresarial
+              - when 'NDP'
+                | Reunião de Desenvolvimento e Pesquisa
+              - when 'NAM'
+                | Reunião de Atendimento e Marketing
+              - when 'NUT'
+                | Reunião de Talentos
+              - when 'PC'
+                | Reunião do Pequeno Conselho
+              - when 'CJR'
+                | Reunião Geral
 
       .hidden-xs
         .text-right
-          = @record.number
-          | ª 
-          - case @record.sector.short_name
-            - when 'NOE'
-              | Reunião de Organização Empresarial
-            - when 'NDP'
-              | Reunião de Desenvolvimento e Pesquisa
-            - when 'NAM'
-              | Reunião de Atendimento e Marketing
-            - when 'NUT'
-              | Reunião de Talentos
-            - when 'PC'
-              | Reunião do Pequeno Conselho
-            - when 'CJR'
-              | Reunião Geral
-              
+          - if @record.number.nil?
+            | Nova Ata de Reunião
+          - else
+            = @record.number
+            | ª 
+            - case @record.sector.short_name
+              - when 'NOE'
+                | Reunião de Organização Empresarial
+              - when 'NDP'
+                | Reunião de Desenvolvimento e Pesquisa
+              - when 'NAM'
+                | Reunião de Atendimento e Marketing
+              - when 'NUT'
+                | Reunião de Talentos
+              - when 'PC'
+                | Reunião do Pequeno Conselho
+              - when 'CJR'
+                | Reunião Geral
+                
 hr.divider

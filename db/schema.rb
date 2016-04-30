@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160424012010) do
+ActiveRecord::Schema.define(version: 20160426153555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,16 @@ ActiveRecord::Schema.define(version: 20160424012010) do
 
   add_index "discussions", ["record_id"], name: "index_discussions_on_record_id", using: :btree
 
+  create_table "record_users", force: :cascade do |t|
+    t.integer  "record_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "record_users", ["record_id"], name: "index_record_users_on_record_id", using: :btree
+  add_index "record_users", ["user_id"], name: "index_record_users_on_user_id", using: :btree
+
   create_table "records", force: :cascade do |t|
     t.string   "date"
     t.datetime "created_at", null: false
@@ -35,11 +45,6 @@ ActiveRecord::Schema.define(version: 20160424012010) do
   end
 
   add_index "records", ["sector_id"], name: "index_records_on_sector_id", using: :btree
-
-  create_table "records_users", id: false, force: :cascade do |t|
-    t.integer "record_id", null: false
-    t.integer "user_id",   null: false
-  end
 
   create_table "sectors", force: :cascade do |t|
     t.string   "name"
@@ -70,6 +75,8 @@ ActiveRecord::Schema.define(version: 20160424012010) do
   add_index "users", ["sector_id"], name: "index_users_on_sector_id", using: :btree
 
   add_foreign_key "discussions", "records"
+  add_foreign_key "record_users", "records"
+  add_foreign_key "record_users", "users"
   add_foreign_key "records", "sectors"
   add_foreign_key "users", "sectors"
 end

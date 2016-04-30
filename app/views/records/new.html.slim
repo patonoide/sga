@@ -1,0 +1,79 @@
+= render 'header_record'
+
+.row
+
+  .col-sm-12
+    .alert.alert-info
+      | Você está criando uma ata para o núcleo 
+      = '\'' + @sector.name + ' [' + @sector.short_name + '].\''
+
+= form_for @record do |f|
+
+  / Informações Básicas
+  .row
+
+    .col-sm-12
+      h3 Informações Básicas
+
+    .col-sm-12
+      hr.divider
+    
+    .col-sm-12
+
+      .form-group
+        = f.label 'Data e Horário'
+        #datetimepicker.input-group.date
+          = f.text_field :date, class:'form-control', required: true
+          span.input-group-addon
+            span.glyphicon.glyphicon-calendar
+      
+      .form-group
+        = f.label 'Reunião de nº'
+        = f.number_field :number, class:'form-control', required: true
+      
+      = f.hidden_field :sector_id, value: @record.sector_id
+
+  / Membros
+  .row
+    
+    .col-sm-12
+      h3 Membros
+    
+    .col-sm-12
+      hr.divider
+
+    .col-sm-12
+      = f.fields_for :record_users do |record_user|
+        = render 'record_user_fields', f: record_user
+      = link_to_add_association 'Adicionar Membro', f, :record_users, class: 'btn btn-success'
+
+  / Pautas
+  .row
+    
+    div style="margin-top: 30px"
+      .col-sm-12
+        h3 Pautas
+    
+    .col-sm-12
+      hr.divider
+
+    .col-sm-12
+      = f.fields_for :discussions do |discussion|
+        = render 'discussion_fields', f: discussion
+      .links
+        = link_to_add_association 'Adicionar Pauta', f, :discussions, class: 'btn btn-success'
+
+  / Submit e voltar
+  .row
+    div style="margin-top: 40px"
+      .col-sm-12
+        .btn-group
+          = f.submit 'Salvar', class:'btn btn-primary'
+          = link_to 'Voltar', records_path, class:'btn btn-primary'
+
+javascript:
+  $(document).ready(function() {
+    $('#datetimepicker').datetimepicker({
+      locale: 'pt-br'
+    });
+  });

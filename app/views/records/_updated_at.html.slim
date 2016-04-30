@@ -1,6 +1,7 @@
-.visible-xs
-  .text-center
-    = 'Última atualização em ' + traduz_data_e_hora(@record.updated_at - 60 * 60 * 3)
+- unless @record.updated_at.nil?
+  .visible-xs
+    .text-center
+      = 'Última atualização em ' + traduz_data_e_hora(@record.updated_at - 60 * 60 * 3)
 
-.hidden-xs
-  = 'Última atualização em ' + traduz_data_e_hora(@record.updated_at - 60 * 60 * 3)
+  .hidden-xs
+    = 'Última atualização em ' + traduz_data_e_hora(@record.updated_at - 60 * 60 * 3)

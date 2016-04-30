@@ -19,14 +19,12 @@
           |  atas 
         | para o núcleo selecionado.
 
-  = form_tag('/records/new', remote: true) do
-    
-    = hidden_field_tag :sector_id, @sector.id
-
-    .col-sm-3 style="padding-bottom: 10px"
-      = button_tag type: 'submit', class: 'btn btn-success btn-block', style: 'margin-top: 3px' do
-        i.fa.fa-plus
-        | &nbsp;&nbsp;&nbsp;Criar Nova Ata
+  .col-sm-3 style="padding-bottom: 10px"
+    = link_to "/records/#{@sector.id}/new", class: 'btn btn-success btn-block', 
+                               style: 'margin-top: 3px',
+                               method: :post do
+      i.fa.fa-plus
+      | &nbsp;&nbsp;&nbsp;Criar Nova Ata
 
   .col-sm-12
     #form_basic_info style="padding-top: 5px"
@@ -69,18 +67,8 @@
 
                   = link_to edit_record_path(record),
                     class:'btn btn-sm btn-default',
-                    title:'Editar Ata', remote: true do
+                    title:'Editar Ata' do
                     i.fa.fa-pencil
-
-                  = link_to edit_discussions_path(record),
-                    class:'btn btn-sm btn-default',
-                    title:'Editar Pautas' do
-                    i.fa.fa-list-alt
-
-                  = link_to edit_users_path(record),
-                    class:'btn btn-sm btn-default',
-                    title:'Editar Membros' do
-                    i.fa.fa-user
 
                   = link_to record,
                     method: :delete,

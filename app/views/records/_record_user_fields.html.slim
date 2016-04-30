@@ -1,0 +1,16 @@
+.nested-fields
+  
+  .col-sm-10
+    .form-group
+      = f.label 'Nome do Membro'
+      = f.select :user_id, User.all.map { |u| [u.name, u.id] },
+                           { include_blank: 'Selecione o membro' },
+                           { class: 'form-control' }
+  .col-sm-2
+    div style="margin-top: 25px"
+      = link_to_remove_association f, class: 'btn btn-warning btn-block' do
+        | Excluir Membro
+        | &nbsp;&nbsp;
+        i.fa.fa-times
+
+hr.divider

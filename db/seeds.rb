@@ -1,3 +1,5 @@
+RecordUser.destroy_all
+Discussion.destroy_all
 Record.destroy_all
 Sector.destroy_all
 User.destroy_all

@@ -1,0 +1,102 @@
+= render 'header_record'
+
+= form_for @record do |f|
+
+  / Informações Básicas
+  .row
+
+    .col-sm-12
+      .alert.alert-info
+        - unless @record.updated_at.nil?
+          = render 'updated_at'
+
+    .col-sm-12
+      h3 Informações Básicas
+
+    .col-sm-12
+      hr.divider
+    
+    .col-sm-12
+
+      .form-group
+        = f.label 'Data e Horário'
+        #datetimepicker.input-group.date
+          = f.text_field :date, class:'form-control', required: true
+          span.input-group-addon
+            span.glyphicon.glyphicon-calendar
+      
+      .form-group
+        = f.label 'Reunião de nº'
+        = f.number_field :number, class:'form-control', required: true
+      
+      = f.hidden_field :sector_id, value: @record.sector_id
+
+  / Membros
+  .row
+    
+    .col-sm-12
+      h3 Membros
+    
+    .col-sm-12
+      hr.divider
+
+    .col-sm-12 style="padding-top: 10px"
+    
+      - if @record.users.blank?
+
+        .alert.alert-danger
+          i.fa.fa-exclamation-circle
+          | &nbsp;&nbsp; Não há membros para esta reunião.
+
+      - else
+
+        table.table
+
+          thead
+            tr
+              th Membro
+              th Email
+
+          tbody
+
+            - @record.users.each do |user|
+
+              tr
+                td = user.name
+                td = user.email
+
+  / Pautas
+  .row
+
+    .col-sm-12
+      h3 Pautas
+    
+    .col-sm-12
+      hr.divider
+        
+    .col-sm-12.col-xs-12
+      - if @record.discussions.blank?
+        .alert.alert-danger
+          i.fa.fa-exclamation-circle
+          | &nbsp;&nbsp; Não há pautas para esta reunião.
+        
+    .col-sm-12
+      = f.fields_for :discussions do |discussion|
+        = render 'discussion_fields', f: discussion
+      .links
+        = link_to_add_association 'Adicionar Pauta', f, :discussions, class: 'btn btn-success'
+
+  / Submit e voltar
+  .row style="margin-top: 20px"
+    
+    .col-sm-12
+      .btn-group
+        = f.submit 'Salvar', class:'btn btn-primary'
+        = link_to 'Voltar', records_path, class:'btn btn-primary'
+
+javascript:
+  $(document).ready(function() {
+    $('#datetimepicker').datetimepicker({
+      locale: 'pt-br'
+    });
+  });

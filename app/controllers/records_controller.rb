@@ -5,9 +5,7 @@ class RecordsController < ApplicationController
                                     :edit, 
                                     :update, 
                                     :destroy, 
-                                    :download,
-                                    :edit_users,
-                                    :edit_discussions]
+                                    :download]
 
   # GET /records
   def index
@@ -31,6 +29,7 @@ class RecordsController < ApplicationController
 
   # GET /records/new
   def new
+    @sector = Sector.find(params[:sector_id])
     @record = Record.new(sector_id: params[:sector_id])
   end
 
@@ -38,26 +37,27 @@ class RecordsController < ApplicationController
   def edit
   end
 
-  def edit_users
-  end
-
-  def edit_discussions
-  end
-
   # POST /records
   # POST /records.json
   def create
     @sector = Sector.find(record_params[:sector_id])
-    @record = Record.create(record_params)
+    @record = Record.new(record_params)
     @records = @sector.records
+
+    respond_to do |format|
+      if @record.save
+        format.html { redirect_to record_path(@record), notice: 'A ata foi criada com sucesso!' }
+      end
+    end
   end
 
   # PATCH/PUT /records/1
   # PATCH/PUT /records/1.json
   def update
-    unless params[:record].nil?
-      @record.update(record_params)
-      @record.update_attribute(:updated_at, Time.now)
+    respond_to do |format|
+      if @record.update_attributes(record_params)
+        format.html { redirect_to record_path(@record), notice: 'A ata foi atualizada com sucesso!' }
+      end
     end
   end
 
@@ -80,7 +80,7 @@ class RecordsController < ApplicationController
       params.require(:record).permit(:date, 
              :sector_id,
              :number,
-             user_ids: [],
+             record_users_attributes: [:id, :user_id, :_destroy],
              discussions_attributes: [:id, :name, :content, :_destroy])
     end
 
