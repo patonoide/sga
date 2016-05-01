@@ -14,48 +14,33 @@ html
     meta name="viewport" content="width=device-width, initial-scale=1"
 
   body
-    
-    nav.navbar.navbar-default.navbar-fixed-top
-
-      .container
-
-        .navbar-header
-
-          button.navbar-toggle.collapsed[type="button" data-toggle="collapse" data-target="#menu" aria-expanded="false"]
-            span.sr-only
-              | Toggle
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-
-          a.navbar-brand[href="/", title="Sistema de Gerenciamento de Atas"]
-            | SGA
-
-        #menu.collapse.navbar-collapse
-
-          ul.nav.navbar-nav
-
-            li.active
-              a[href="/records"]
-                | Atas
-                span.sr-only
-                  | (Atual)
-            li
-              a[href="#"]
-                | Usuários
-
-          ul.nav.navbar-nav.navbar-right
-
-            li.pull-right
-              a[href="#"]
-                | Sair
-
-            li
-              a[href="#"]
-                | Editar Perfil
-  
-    .container
-      = alert
-      = notice
       
+    - if user_signed_in?
+      = render 'layouts/navbar'
+
+    .container
+
+      .row style="padding-top: 10px"
+  
+        .col-sm-2.col-xs-12
+          
+          .visible-xs
+            .text-center
+              = image_tag 'cjr.png', class: 'logo'
+
+          .hidden-xs
+            = image_tag 'cjr.png', class: 'logo'
+
+        .col-sm-10.col-xs-12
+        
+          .visible-xs
+            h1.text-center
+              = yield :text_logo
+
+          .hidden-xs
+            h1.text-right
+              = yield :text_logo
+
+      hr.divider
+
       = yield

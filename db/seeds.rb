@@ -1,8 +1,8 @@
-Status.destroy_all
-RecordUser.destroy_all
-Discussion.destroy_all
-Record.destroy_all
 Sector.destroy_all
+Record.destroy_all
+RecordsUser.destroy_all
+Discussion.destroy_all
+Status.destroy_all
 User.destroy_all
 
 nucleos = [{ name: 'Núcleo de Organização Empresarial', short_name: 'NOE' },
@@ -21,3 +21,5 @@ Status.create(status)
 for i in 1..10
   User.create(name: 'Membro ' + i.to_s, email: 'membro' + i.to_s + '@cjr.org.br', password: 'teste123')
 end
+
+User.create(name: 'Administrador', email: 'admin@cjr.org.br', password: 'admincjr')

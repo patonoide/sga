@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160430191319) do
+ActiveRecord::Schema.define(version: 20160501000639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,18 +26,6 @@ ActiveRecord::Schema.define(version: 20160430191319) do
 
   add_index "discussions", ["record_id"], name: "index_discussions_on_record_id", using: :btree
 
-  create_table "record_users", force: :cascade do |t|
-    t.integer  "record_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "status_id"
-  end
-
-  add_index "record_users", ["record_id"], name: "index_record_users_on_record_id", using: :btree
-  add_index "record_users", ["status_id"], name: "index_record_users_on_status_id", using: :btree
-  add_index "record_users", ["user_id"], name: "index_record_users_on_user_id", using: :btree
-
   create_table "records", force: :cascade do |t|
     t.string   "date"
     t.datetime "created_at", null: false
@@ -47,6 +35,18 @@ ActiveRecord::Schema.define(version: 20160430191319) do
   end
 
   add_index "records", ["sector_id"], name: "index_records_on_sector_id", using: :btree
+
+  create_table "records_users", force: :cascade do |t|
+    t.integer  "record_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "status_id"
+  end
+
+  add_index "records_users", ["record_id"], name: "index_records_users_on_record_id", using: :btree
+  add_index "records_users", ["status_id"], name: "index_records_users_on_status_id", using: :btree
+  add_index "records_users", ["user_id"], name: "index_records_users_on_user_id", using: :btree
 
   create_table "sectors", force: :cascade do |t|
     t.string   "name"
@@ -83,9 +83,9 @@ ActiveRecord::Schema.define(version: 20160430191319) do
   add_index "users", ["sector_id"], name: "index_users_on_sector_id", using: :btree
 
   add_foreign_key "discussions", "records"
-  add_foreign_key "record_users", "records"
-  add_foreign_key "record_users", "statuses"
-  add_foreign_key "record_users", "users"
   add_foreign_key "records", "sectors"
+  add_foreign_key "records_users", "records"
+  add_foreign_key "records_users", "statuses"
+  add_foreign_key "records_users", "users"
   add_foreign_key "users", "sectors"
 end

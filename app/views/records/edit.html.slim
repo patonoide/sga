@@ -1,4 +1,4 @@
-= render 'header_record'
+= content_for :text_logo, "#{@record.number}ª #{select_meeting_name(@record.sector.short_name)}"
 
 = form_for @record do |f|
 
@@ -41,10 +41,10 @@
   .row
 
     .col-sm-12
-      = f.fields_for :record_users do |record_user|
-        = render 'record_user_fields', f: record_user
+      = f.fields_for :records_users do |records_user|
+        = render 'records_user_fields', f: records_user
       .links
-        = link_to_add_association 'Adicionar Membro', f, :record_users, class: 'btn btn-success'
+        = link_to_add_association 'Adicionar Membro', f, :records_users, class: 'btn btn-success'
 
 
   / Pautas

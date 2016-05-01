@@ -2,34 +2,44 @@ module RecordsHelper
 
   include TimeHelper
 
+  def select_meeting_name(short_name)
+    meetings = { "NOE" => 'Reunião de Organização Empresarial',
+                 "NDP" => 'Reunião de Desenvolvimento e Pesquisa',
+                 "NAM" => 'Reunião de Atendimento e Marketing',
+                 "NUT" => 'Reunião de Talentos',
+                 "PC" => 'Reunião do Pequeno Conselho',
+                 "CJR" => 'Reunião Geral' }
+
+    meetings[short_name]
+  end
+
+  def select_short_name_meeting(short_name)
+    file_short_names = { "NOE" => 'RENOE', "NDP" => 'RENDP', "NAM" => 'RENAM',
+                         "NUT" => 'RENUT', "PC" => 'REPC', "CJR" => 'REGER' }
+
+    file_short_names[short_name]
+  end
+
+  def status_tag(status)
+    case status
+      when 'Presente'
+        content_tag(:p, status, class: 'label label-success')
+      when 'Falta'
+        content_tag(:p, status, class: 'label label-danger')
+      when 'Falta Justificada'
+        content_tag(:p, status, class: 'label label-warning')
+    end
+  end
+
   def download_record(ata)
 
     numero = ata.number
-    nucleo = ata.sector.short_name
-    membros = ata.users
+    membros = ata.records_users
+    sigla = ata.sector.short_name
     data = traduz_para_nome_de_arquivo(ata.date.to_time)
-    
-    case nucleo
-      when 'NOE'
-        nome = "Reunião de Organização Empresarial"
-        nome_arquivo = numero.to_s + 'a_RENOE_' + data
-      when 'NDP'
-        nome = "Reunião de Desenvolvimento e Pesquisa"
-        nome_arquivo = numero.to_s + 'a_RENDP_' + data
-      when 'NAM'
-        nome = "Reunião de Atendimento e Marketing"
-        nome_arquivo = numero.to_s + 'a_RENAM_' + data
-      when 'NUT'
-        nome = "Reunião de Talentos"
-        nome_arquivo = numero.to_s + 'a_RENUT_' + data
-      when 'PC'
-        nome = "Reunião do Pequeno Conselho"
-        nome_arquivo = numero.to_s + 'a_REPC_' + data
-      when 'CJR'
-        nome = "Reunião Geral"
-        nome_arquivo = numero.to_s + 'a_REGER_' + data
-    end
-
+    nome = select_meeting_name(sigla)
+    nome_arquivo = "#{numero}a_#{select_short_name_meeting(sigla)}_#{data}"
+  
     Prawn::Document.generate(Rails.root.join('tmp').to_s + "/#{nome_arquivo}.pdf") do
 
       repeat :all do
@@ -56,10 +66,10 @@ module RecordsHelper
       move_down 50
 
       indent(42, 45) do
-        text "Membros presentes:", leading: 10, style: :bold
+        text "Membros:", leading: 10, style: :bold
 
         membros.each do |membro|
-          text membro.name + ' - ' + membro.email, leading: 6
+          text membro.user.name + ' - ' + membro.user.email + ' - ' + membro.status.name, leading: 6
         end
       end
 

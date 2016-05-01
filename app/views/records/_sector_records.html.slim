@@ -33,7 +33,7 @@
     
     .col-sm-12
 
-      table.table#sector_records_table
+      table.table.datatable
 
         thead
           tr
@@ -68,19 +68,22 @@
                   = link_to edit_record_path(record),
                     class:'btn btn-sm btn-default',
                     title:'Editar Ata' do
-                    i.fa.fa-pencil
+                      | Editar &nbsp;&nbsp;
+                      i.fa.fa-pencil
 
                   = link_to record,
                     method: :delete,
                     data: { confirm: 'Você tem certeza?' },
                     remote: true, class:'btn btn-sm btn-default',
                     title: 'Excluir Ata' do
-                    i.fa.fa-times
+                      | Excluir &nbsp;&nbsp;
+                      i.fa.fa-times
 
 / dom: '<"top">rt<"pull-left"f><"pull-right"p><"clear">',
 javascript:
   $(document).ready( function () {
-    $('#sector_records_table').DataTable({
+    $('.datatable').DataTable({
+      'dom': '<"top">rt<"pull-left"f><"pull-right"p><"clear">',
       "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json"},
       responsive: true
     });

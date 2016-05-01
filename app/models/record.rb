@@ -1,10 +1,10 @@
 class Record < ActiveRecord::Base
 
-  has_many :record_users
-  has_many :users, :through => :record_users, :class_name => 'User'
+  has_many :records_users
+  has_many :users, through: :records_users, class_name: 'User'
 
   accepts_nested_attributes_for :users
-  accepts_nested_attributes_for :record_users
+  accepts_nested_attributes_for :records_users
 
   belongs_to :sector
   has_many :discussions, dependent: :destroy

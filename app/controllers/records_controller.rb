@@ -89,7 +89,7 @@ class RecordsController < ApplicationController
       params.require(:record).permit(:date, 
              :sector_id,
              :number,
-             record_users_attributes: [:id, :user_id, :status_id, :_destroy],
+             records_users_attributes: [:id, :user_id, :status_id, :_destroy],
              discussions_attributes: [:id, :name, :content, :_destroy])
     end
 

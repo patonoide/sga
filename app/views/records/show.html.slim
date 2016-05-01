@@ -1,4 +1,4 @@
-= render 'header_record'
+= content_for :text_logo, "#{@record.number}ª #{select_meeting_name(@record.sector.short_name)}"
 
 .row
 
@@ -15,7 +15,7 @@
         | Data e hora da reunião: 
       = traduz_data_e_hora(@record.date.to_time)
 
-    .text-success
+    div style="margin-top: 5px"
       = render 'updated_at'
 
   .col-sm-2
@@ -38,20 +38,23 @@ hr.divider
 
     - else
 
-      table.table
+      table.table.datatable
 
         thead
           tr
+            th Status
             th Membro
             th Email
 
         tbody
 
-          - @record.users.each do |user|
+          - @record.records_users.each do |records_user|
 
             tr
-              td = user.name
-              td = user.email
+              td 
+                = status_tag(records_user.status.name)
+              td = records_user.user.name
+              td = records_user.user.email
 .row
 
   .col-sm-12
@@ -77,3 +80,12 @@ hr.divider
               = discussion.content
 
 = link_to 'Voltar', records_path, class:'btn btn-primary'
+
+javascript:
+  $(document).ready( function () {
+    $('.datatable').DataTable({
+      'dom': '<"top">rt<"pull-left"f><"pull-right"p><"clear">',
+      "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json"},
+      responsive: true
+    });
+  } );

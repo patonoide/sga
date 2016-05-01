@@ -1,25 +1,4 @@
-.row style="padding-top: 10px"
-  
-  .col-sm-2.col-xs-12
-    
-    .visible-xs
-      .text-center
-        = image_tag 'cjr.png', class: 'logo'
-
-    .hidden-xs
-      = image_tag 'cjr.png', class: 'logo'
-
-  .col-sm-10.col-xs-12
-  
-    .visible-xs
-      h1.text-center
-        | Sistema de Gerenciamento de Atas
-
-    .hidden-xs
-      h1.text-right
-        | Sistema de Gerenciamento de Atas
-
-hr.divider
+= content_for :text_logo, 'Sistema de Gerenciamento de Atas'
 
 .row
 
