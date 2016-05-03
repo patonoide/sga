@@ -35,6 +35,7 @@ module RecordsHelper
 
     numero = ata.number
     membros = ata.records_users
+    pautas = ata.discussions
     sigla = ata.sector.short_name
     data = traduz_para_nome_de_arquivo(ata.date.to_time)
     nome = select_meeting_name(sigla)
@@ -68,8 +69,12 @@ module RecordsHelper
       indent(42, 45) do
         text "Membros:", leading: 10, style: :bold
 
-        membros.each do |membro|
-          text membro.user.name + ' - ' + membro.user.email + ' - ' + membro.status.name, leading: 6
+        if membros.blank?
+          text "Não há membros para esta reunião."
+        else
+          membros.each do |membro|
+            text membro.user.name + ' - ' + membro.user.email + ' - ' + membro.status.name, leading: 6
+          end
         end
       end
 
@@ -78,13 +83,17 @@ module RecordsHelper
       indent(42, 45) do
         text "Pautas:", leading: 10, style: :bold
 
-        ata.discussions.each do |pauta|
-          text pauta.name, leading: 6
-          text pauta.content, align: :justify
-          move_down 20
-          if cursor < 100
-            start_new_page
-            move_down 100
+        if pautas.blank?
+          text "Não há pautas para esta reunião."
+        else
+          pautas.each do |pauta|
+            text pauta.name, leading: 6
+            text pauta.content, align: :justify
+            move_down 20
+            if cursor < 100
+              start_new_page
+              move_down 100
+            end
           end
         end
       end

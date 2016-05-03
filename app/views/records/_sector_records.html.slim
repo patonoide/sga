@@ -2,29 +2,54 @@
 
   - if @sector.records.blank?
     
-    .col-sm-9
-      #no_records.alert.alert-danger
-        i.fa.fa-exclamation-circle
-        | &nbsp;&nbsp; Não há atas para o núcleo selecionado.
+    - if can? :new, Record
+
+      .col-sm-9
+        #no_records.alert.alert-danger
+          i.fa.fa-exclamation-circle
+          | &nbsp;&nbsp; Não há atas para o núcleo selecionado.
+
+    - else
+
+      .col-sm-12
+        #no_records.alert.alert-danger
+          i.fa.fa-exclamation-circle
+          | &nbsp;&nbsp; Não há atas para o núcleo selecionado.      
 
   - else
     
-    .col-sm-9
-      .alert.alert-info
-        | Há 
-        = @sector.records.count
-        - if @sector.records.count == 1
-          |  ata 
-        - else
-          |  atas 
-        | para o núcleo selecionado.
+    - if can? :new, Record
 
-  .col-sm-3 style="padding-bottom: 10px"
-    = link_to "/records/#{@sector.id}/new", class: 'btn btn-success btn-block', 
-                               style: 'margin-top: 3px',
-                               method: :post do
-      i.fa.fa-plus
-      | &nbsp;&nbsp;&nbsp;Criar Nova Ata
+      .col-sm-9
+        .alert.alert-info
+          | Há 
+          = @sector.records.count
+          - if @sector.records.count == 1
+            |  ata 
+          - else
+            |  atas 
+          | para o núcleo selecionado.
+
+    - else
+
+      .col-sm-12
+        .alert.alert-info
+          | Há 
+          = @sector.records.count
+          - if @sector.records.count == 1
+            |  ata 
+          - else
+            |  atas 
+          | para o núcleo selecionado.
+
+  - if can? :new, Record
+
+    .col-sm-3 style="padding-bottom: 10px"
+      = link_to "/records/#{@sector.id}/new", class: 'btn btn-success btn-block', 
+                                 style: 'margin-top: 3px',
+                                 method: :post do
+        i.fa.fa-plus
+        | &nbsp;&nbsp;&nbsp;Criar Nova Ata
 
   .col-sm-12
     #form_basic_info style="padding-top: 5px"
@@ -65,19 +90,21 @@
 
                 .btn-group
 
-                  = link_to edit_record_path(record),
-                    class:'btn btn-sm btn-default',
-                    title:'Editar Ata' do
-                      | Editar &nbsp;&nbsp;
-                      i.fa.fa-pencil
+                  - if can? :edit, Record
+                    = link_to edit_record_path(record),
+                      class:'btn btn-sm btn-default',
+                      title:'Editar Ata' do
+                        | Editar &nbsp;&nbsp;
+                        i.fa.fa-pencil
 
-                  = link_to record,
-                    method: :delete,
-                    data: { confirm: 'Você tem certeza?' },
-                    remote: true, class:'btn btn-sm btn-default',
-                    title: 'Excluir Ata' do
-                      | Excluir &nbsp;&nbsp;
-                      i.fa.fa-times
+                  - if can? :destroy, Record
+                    = link_to record,
+                      method: :delete,
+                      data: { confirm: 'Você tem certeza?' },
+                      remote: true, class:'btn btn-sm btn-default',
+                      title: 'Excluir Ata' do
+                        | Excluir &nbsp;&nbsp;
+                        i.fa.fa-times
 
 / dom: '<"top">rt<"pull-left"f><"pull-right"p><"clear">',
 javascript:

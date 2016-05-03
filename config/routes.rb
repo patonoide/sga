@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   devise_for :users
+  resources :users
   resources :records, except: :new
 
   devise_scope :user do

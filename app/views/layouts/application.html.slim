@@ -8,39 +8,43 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"
     link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/t/bs/dt-1.10.11,r-2.0.2/datatables.min.css"
+    link rel="stylesheet" type="text/css" href="http://csshake.surge.sh/csshake.min.css"
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     script type="text/javascript" src="https://cdn.datatables.net/t/bs/dt-1.10.11,r-2.0.2/datatables.min.js"
     = csrf_meta_tags
     meta name="viewport" content="width=device-width, initial-scale=1"
 
-  body
-      
-    - if user_signed_in?
-      = render 'layouts/navbar'
+  - if user_signed_in?
 
-    .container
+    body.authenticated
+      #modal-holder
+      .container
+        = render 'layouts/navbar'
+        = render 'layouts/header'
+        = yield
 
-      .row style="padding-top: 10px"
-  
-        .col-sm-2.col-xs-12
-          
-          .visible-xs
-            .text-center
-              = image_tag 'cjr.png', class: 'logo'
+  - else
 
-          .hidden-xs
-            = image_tag 'cjr.png', class: 'logo'
+    body.unauthenticated
 
-        .col-sm-10.col-xs-12
-        
-          .visible-xs
-            h1.text-center
-              = yield :text_logo
+      .unauthenticated-box.center-block
 
-          .hidden-xs
-            h1.text-right
-              = yield :text_logo
+        = render 'layouts/header'
+        = yield
 
-      hr.divider
-
-      = yield
+        hr.divider
+          .row
+            .col-sm-6.col-xs-12
+              .hidden-xs
+                p.text-left
+                  | Sistema de Gerenciamento de Atas
+              .visible-xs
+                p.text-center
+                  | Sistema de Gerenciamento de Atas
+            .col-sm-6.col-xs-12
+              .hidden-xs
+                p.text-right
+                  | Empresa Júnior de Computação
+              .visible-xs
+                p.text-center
+                  | Empresa Júnior de Computação

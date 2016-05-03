@@ -17,6 +17,7 @@
 //= require bootstrap-datetimepicker
 //= require cocoon
 //= require locale
+//= require modal
 //= require turbolinks
 //= require_tree .
 

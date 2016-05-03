@@ -1,0 +1,36 @@
+= content_for :text_logo, 'Usuários'
+
+table.table.datatable
+
+  thead
+    tr
+      th Nome
+      th Email
+      th Perfil
+      th
+      th
+
+  tbody
+
+    - @users.each do |user|
+
+      tr
+        td = user.name
+        td = user.email
+        td = user.try(:role).try(:name)
+        td align="right"
+          = link_to 'Editar', edit_user_path(user), data: { modal: true }
+        td align="right"
+          = link_to 'Excluir', user, data: { confirm: 'Você tem certeza?' }, method: :delete
+
+div style="padding-top: 50px"
+  = link_to 'Novo Usuário', new_user_path, class: 'btn btn-primary', data: { modal: true }
+
+javascript:
+  $(document).ready( function () {
+    $('.datatable').DataTable({
+      'dom': '<"top">rt<"pull-left"f><"pull-right"p><"clear">',
+      "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json"},
+      responsive: true
+    });
+  } );

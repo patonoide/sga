@@ -79,7 +79,9 @@ hr.divider
             .text-justify
               = discussion.content
 
-= link_to 'Voltar', records_path, class:'btn btn-primary'
+.btn-group
+  = link_to 'Editar', edit_record_path(@record), class: 'btn btn-primary'
+  = link_to 'Voltar', records_path, class: 'btn btn-primary'
 
 javascript:
   $(document).ready( function () {

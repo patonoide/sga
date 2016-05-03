@@ -18,21 +18,17 @@ nav.navbar.navbar-default.navbar-fixed-top
 
       ul.nav.navbar-nav
 
-        li.active
-          a[href="/records"]
-            | Atas
-            span.sr-only
-              | (Atual)
         li
-          a[href="#"]
-            | Usuários
+          = link_to 'Atas', records_path        
+
+        - if can? :manage, User
+          li
+            = link_to 'Usuários', users_path
 
       ul.nav.navbar-nav.navbar-right
 
         li.pull-right
-          a[href="#"]
-            | Sair
+          = link_to 'Sair', logout_path
 
         li
-          a[href="#"]
-            | Editar Perfil
+          = link_to 'Editar Perfil', edit_user_path(current_user), data: { modal: true }

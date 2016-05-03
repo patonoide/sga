@@ -1,5 +1,7 @@
 class RecordsController < ApplicationController
 
+  load_and_authorize_resource
+
   respond_to :html, :js
   before_action :set_record, only: [:show, 
                                     :edit, 

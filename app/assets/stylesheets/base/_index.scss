@@ -5,3 +5,8 @@
 
 @import 'bases';
 @import 'normalize';
+
+.container-unauthenticated {
+  @extend .container;
+  width: 60%;
+}
