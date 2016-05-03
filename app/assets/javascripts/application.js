@@ -18,6 +18,7 @@
 //= require cocoon
 //= require locale
 //= require modal
+//= require flash
 //= require turbolinks
 //= require_tree .
 

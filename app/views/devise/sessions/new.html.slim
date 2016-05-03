@@ -15,3 +15,8 @@
       = f.password_field :password, placeholder: 'Senha', class: 'form-control', required: true
 
   = f.submit 'Entrar', class: 'btn btn-primary btn-block'
+
+br
+
+.text-center
+  = link_to 'Esqueci minha senha', new_user_password_path

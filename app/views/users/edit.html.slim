@@ -1,5 +1,5 @@
 - unless @user == current_user or current_user.admin?
-  / Redirect para a home
+  - not_authorized
 - else
   = content_for :title, 'Editar Usuário'
   = render 'form'

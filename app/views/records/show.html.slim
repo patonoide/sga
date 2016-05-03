@@ -80,7 +80,8 @@ hr.divider
               = discussion.content
 
 .btn-group
-  = link_to 'Editar', edit_record_path(@record), class: 'btn btn-primary'
+  - if can? :edit, Record
+    = link_to 'Editar', edit_record_path(@record), class: 'btn btn-primary'
   = link_to 'Voltar', records_path, class: 'btn btn-primary'
 
 javascript:

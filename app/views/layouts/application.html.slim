@@ -21,6 +21,7 @@ html
       .container
         = render 'layouts/navbar'
         = render 'layouts/header'
+        = render 'layouts/flash'
         = yield
 
   - else
@@ -30,6 +31,7 @@ html
       .unauthenticated-box.center-block
 
         = render 'layouts/header'
+        = render 'layouts/flash'
         = yield
 
         hr.divider
