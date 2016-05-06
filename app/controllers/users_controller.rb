@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   end
 
   def update
-
+    # TO DO: não atualizar quando a senha é menor de 8 dígitos
     if params[:password].blank? and params[:password_confirmation].blank?
       params.delete(:password)
       params.delete(:password_confirmation)

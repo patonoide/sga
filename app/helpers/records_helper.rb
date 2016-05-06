@@ -2,22 +2,22 @@ module RecordsHelper
 
   include TimeHelper
 
-  def select_meeting_name(short_name)
-    meetings = { "NOE" => 'Reunião de Organização Empresarial',
-                 "NDP" => 'Reunião de Desenvolvimento e Pesquisa',
-                 "NAM" => 'Reunião de Atendimento e Marketing',
-                 "NUT" => 'Reunião de Talentos',
-                 "PC" => 'Reunião do Pequeno Conselho',
-                 "CJR" => 'Reunião Geral' }
+  Meetings = { "NOE" => 'Reunião de Organização Empresarial',
+               "NDP" => 'Reunião de Desenvolvimento e Pesquisa',
+               "NAM" => 'Reunião de Atendimento e Marketing',
+               "NUT" => 'Reunião de Talentos',
+               "PC"  => 'Reunião do Pequeno Conselho',
+               "CJR" => 'Reunião Geral' }
 
-    meetings[short_name]
+  File_short_names = { "NOE" => 'RENOE', "NDP" => 'RENDP', "NAM" => 'RENAM',
+                       "NUT" => 'RENUT', "PC"  => 'REPC',  "CJR" => 'REGER' }
+
+  def select_meeting_name(short_name)
+    Meetings[short_name]
   end
 
   def select_short_name_meeting(short_name)
-    file_short_names = { "NOE" => 'RENOE', "NDP" => 'RENDP', "NAM" => 'RENAM',
-                         "NUT" => 'RENUT', "PC" => 'REPC', "CJR" => 'REGER' }
-
-    file_short_names[short_name]
+    File_short_names[short_name]
   end
 
   def status_tag(status)
@@ -39,8 +39,8 @@ module RecordsHelper
     sigla = ata.sector.short_name
     data = traduz_para_nome_de_arquivo(ata.date.to_time)
     nome = select_meeting_name(sigla)
-    nome_arquivo = "#{numero}a_#{select_short_name_meeting(sigla)}_#{data}"
-  
+    nome_arquivo = "[#{select_short_name_meeting(sigla)}] #{numero}ª Reunião Ata - #{data}"
+
     Prawn::Document.generate(Rails.root.join('tmp').to_s + "/#{nome_arquivo}.pdf") do
 
       repeat :all do
@@ -52,11 +52,11 @@ module RecordsHelper
         end
 
         # footer
-        bounding_box [bounds.left, bounds.bottom], :width  => bounds.width do
-          text_box "Empresa Júnior de Computação - CJR", align: :center, size: 11, at: [0, 55]
-          text_box "Universidade de Brasília, Campus Darcy Ribeiro", align: :center, size: 11, at: [0, 35]
-          text_box "Departamento de Ciência da Computação, Prédio CiC/EST, AT-12/11", align: :center, size: 11, at: [0, 15]
-        end
+        # bounding_box [bounds.left, bounds.bottom], :width  => bounds.width do
+        #   text_box "Empresa Júnior de Computação - CJR", align: :center, size: 11, at: [0, 55]
+        #   text_box "Universidade de Brasília, Campus Darcy Ribeiro", align: :center, size: 11, at: [0, 35]
+        #   text_box "Departamento de Ciência da Computação, Prédio CiC/EST, AT-12/11", align: :center, size: 11, at: [0, 15]
+        # end
       end
 
       move_down 50
@@ -88,12 +88,14 @@ module RecordsHelper
         else
           pautas.each do |pauta|
             text pauta.name, leading: 6
-            text pauta.content, align: :justify
+            content = Rails::Html::WhiteListSanitizer.new.sanitize(pauta.content.gsub("<br>", "\n"), tags: %w(strong em), attributes: %w(src style))
+            debugger
+            text content, inline_format: true, align: :justify
             move_down 20
-            if cursor < 100
-              start_new_page
-              move_down 100
-            end
+            # if cursor < 100
+            #   start_new_page
+            #   move_down 100
+            # end
           end
         end
       end

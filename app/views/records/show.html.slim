@@ -77,7 +77,7 @@ hr.divider
             = discussion.name
           .panel-body
             .text-justify
-              = discussion.content
+              = discussion.content.html_safe
 
 .btn-group
   - if can? :edit, Record

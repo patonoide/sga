@@ -22,9 +22,6 @@ gem 'cancancan'
 # Responders
 gem 'responders'
 
-# Estatisticas
-gem 'descriptive_statistics', '~> 2.4.0', :require => 'descriptive_statistics/safe'
-
 # Usar SCSS no projeto
 gem 'sass', '~> 3.4', '>= 3.4.21'
 gem 'sass-rails', '~> 5.0'
@@ -46,11 +43,17 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'json'
 
+gem 'wysiwyg-rails'
+gem 'rails-html-sanitizer'
+
 gem 'faker'
 
 gem 'bcrypt', '~> 3.1.7'
 gem 'uglifier', '>= 1.3.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+
+gem 'unicorn'
+gem 'unicorn-rails'
 
 group :production do
   gem 'rails_12factor'
