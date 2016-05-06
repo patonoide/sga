@@ -15,7 +15,7 @@ nucleos = [{ name: 'Núcleo de Organização Empresarial', short_name: 'NOE' },
            
 Sector.create(nucleos)
 
-status = [{ name: 'Presente' }, { name: 'Falta' }, { name: 'Falta Justificada' } ]
+status = [{ name: 'Presente' }, { name: 'Falta' }, { name: 'Falta Justificada' }, { name: 'Atraso' } ]
 
 Status.create(status)
 

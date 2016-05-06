@@ -1,11 +1,12 @@
 module TimeHelper
 
+  Meses = { "January"  => 'janeiro', "February"  => 'fevereiro', "March"     => 'março',
+            "April"    => 'abril',   "May"       => 'maio',      "June"      => 'junho', 
+            "July"     => 'julho',   "August"    => 'agosto',    "September" => 'setembro',
+            "October"  => 'outubro', "November"  => 'novembro',  "December"  => 'dezembro' }
+
   def traduz_mes(mes)
-    meses = { "January" => 'janeiro', "February" => 'fevereiro', "March" => 'março',
-              "April" => 'abril', "May" => 'maio', "June" => 'junho', "July" => 'julho',
-              "August" => 'agosto', "September" => 'setembro', "October" => 'outubro',
-              "November" => 'novembro', "December" => 'dezembro' }
-    meses[mes]
+    Meses[mes]
   end
 
   def traduz_data_e_hora(time)
@@ -13,7 +14,7 @@ module TimeHelper
   end
 
   def traduz_para_nome_de_arquivo(time)
-    "#{time.strftime("%d")}_de_#{traduz_mes(time.strftime("%B"))}_de_#{time.strftime("%Y")}" unless time.nil?
+    "#{time.strftime("%d")}-#{time.strftime("%m")}" unless time.nil?
   end
 
 end
