@@ -6,16 +6,13 @@
 
   .form-group
     = f.label 'Discussão'
-    = f.text_area :content, id: "edit",  class: 'form-control wysihtml5'
+    = f.text_area :content, class: "tinymce"
   
+  = tinymce :language => "pt_BR"
+
   = link_to_remove_association f, class: 'btn btn-warning' do
     | Excluir Pauta
     | &nbsp;&nbsp;
     i.fa.fa-times
 
   hr.divider
-
-javascript:
-  $(document).ready(function(){
-    $('.nested-fields .wysihtml5').last().wysihtml5();
-  });

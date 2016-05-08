@@ -43,8 +43,9 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'json'
 
-gem 'simple_form'
-gem 'bootstrap-wysihtml5-rails'
+gem 'tinymce-rails'
+gem 'tinymce-rails-langs'
+
 gem 'rails-html-sanitizer'
 
 gem 'faker'

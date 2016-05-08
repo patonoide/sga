@@ -20,6 +20,7 @@
 //= require modal
 //= require flash
 //= require turbolinks
-//= require bootstrap-wysihtml5
+//= require tinymce
+//= require pt_BR
 //= require_tree .
 
