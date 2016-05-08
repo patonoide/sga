@@ -9,16 +9,12 @@ module RecordsHelper
                "PC"  => 'Reunião do Pequeno Conselho',
                "CJR" => 'Reunião Geral' }
 
+  def select_meeting_name(short_name) Meetings[short_name] end
+
   File_short_names = { "NOE" => 'RENOE', "NDP" => 'RENDP', "NAM" => 'RENAM',
                        "NUT" => 'RENUT', "PC"  => 'REPC',  "CJR" => 'REGER' }
 
-  def select_meeting_name(short_name)
-    Meetings[short_name]
-  end
-
-  def select_short_name_meeting(short_name)
-    File_short_names[short_name]
-  end
+  def select_short_name_meeting(short_name) File_short_names[short_name] end
 
   def status_tag(status)
     case status
@@ -43,20 +39,8 @@ module RecordsHelper
 
     Prawn::Document.generate(Rails.root.join('tmp').to_s + "/#{nome_arquivo}.pdf") do
 
-      repeat :all do
-        move_down 50
-
-        # header
-        bounding_box [bounds.left, bounds.top], :width  => bounds.width do
-          image "app/assets/images/logo.png", position: :center, scale: 0.8
-        end
-
-        # footer
-        # bounding_box [bounds.left, bounds.bottom], :width  => bounds.width do
-        #   text_box "Empresa Júnior de Computação - CJR", align: :center, size: 11, at: [0, 55]
-        #   text_box "Universidade de Brasília, Campus Darcy Ribeiro", align: :center, size: 11, at: [0, 35]
-        #   text_box "Departamento de Ciência da Computação, Prédio CiC/EST, AT-12/11", align: :center, size: 11, at: [0, 15]
-        # end
+      bounding_box [bounds.left, bounds.top], :width  => bounds.width do
+        image "app/assets/images/logo.png", position: :center, scale: 0.8
       end
 
       move_down 50
@@ -87,14 +71,10 @@ module RecordsHelper
           text "Não há pautas para esta reunião."
         else
           pautas.each do |pauta|
-            text pauta.name, leading: 6
+            text pauta.name, leading: 6, style: :bold
             content = Rails::Html::WhiteListSanitizer.new.sanitize(pauta.content.gsub("<br>", "\n"), tags: %w(strong em), attributes: %w(src style))
-            text content, inline_format: true, align: :justify
+            text content, inline_format: true, align: :justify, leading: 6
             move_down 20
-            # if cursor < 100
-            #   start_new_page
-            #   move_down 100
-            # end
           end
         end
       end
