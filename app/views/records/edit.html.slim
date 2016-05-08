@@ -62,10 +62,10 @@
       .links
         = link_to_add_association 'Adicionar Pauta', f, :discussions, class: 'btn btn-success'
 
-  div id="showValues"
-    | Show textarea values
+  / div id="showValues"
+  /   | Show textarea values
 
-  #values
+  / #values
 
   / Submit e voltar
   .row
@@ -94,12 +94,12 @@ javascript:
           }
       });
 
-      $('#showValues').click(function () {
-          var msg = '';
-          $('textarea').each(function (index, ta) {
-              var $ta = $(ta);
-              msg += '<div><strong>Textarea "' + $ta.attr('name') + '" value:</strong><br />' + $ta.val() + '</div>';
-          });
-          $('#values').html(msg);
-      });
+      // $('#showValues').click(function () {
+      //     var msg = '';
+      //     $('textarea').each(function (index, ta) {
+      //         var $ta = $(ta);
+      //         msg += '<div><strong>Textarea "' + $ta.attr('name') + '" value:</strong><br />' + $ta.val() + '</div>';
+      //     });
+      //     $('#values').html(msg);
+      // });
   });
