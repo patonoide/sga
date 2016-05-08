@@ -23,6 +23,8 @@ module RecordsHelper
       when 'Falta'
         content_tag(:p, status, class: 'label label-danger')
       when 'Falta Justificada'
+        content_tag(:p, status, class: 'label label-danger')
+      when 'Atraso'
         content_tag(:p, status, class: 'label label-warning')
     end
   end
