@@ -43,8 +43,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'json'
 
-gem 'tinymce-rails'
-gem 'tinymce-rails-langs'
+gem 'ckeditor'
 
 gem 'rails-html-sanitizer'
 

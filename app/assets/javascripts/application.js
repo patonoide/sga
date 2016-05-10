@@ -20,7 +20,6 @@
 //= require modal
 //= require flash
 //= require turbolinks
-//= require tinymce
-//= require pt_BR
+//= require ckeditor/init
 //= require_tree .
 

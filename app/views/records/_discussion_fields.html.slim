@@ -6,9 +6,7 @@
 
   .form-group
     = f.label 'Discussão'
-    = f.text_area :content, class: "tinymce"
-  
-  / = tinymce :language => "pt_BR"
+    = f.cktext_area :content
 
   = link_to_remove_association f, class: 'btn btn-warning' do
     | Excluir Pauta
@@ -16,16 +14,3 @@
     i.fa.fa-times
 
   hr.divider
-
-/ javascript:
-/   $(function () {
-/     tinymce.init({
-/         selector: "textarea",
-/         statusbar: false,
-/         setup: function (editor) {
-/             editor.on('change', function () {
-/                 tinyMCE.triggerSave();
-/             });
-/         }
-/     });
-/   });
