@@ -27,7 +27,7 @@ var populateTable = function(data) {
       }
 
       else {
-        var status = '<td><div class="label label-danger">Completa</div></td>';
+        var status = '<td><div class="label label-success">Completa</div></td>';
       }
 
       row.append(status);
