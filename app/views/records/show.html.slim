@@ -26,7 +26,7 @@ hr.divider
 .row
   
   .col-sm-12
-    h3 Membros
+    h4 Membros
 
   .col-sm-12 style="padding-top: 10px"
   
@@ -58,11 +58,11 @@ hr.divider
 .row
 
   .col-sm-12
-    h3 Pautas
+    h4 Pautas
 
   .col-sm-12 style="padding-top: 10px"
 
-    - if @record.discussions.blank?
+    - if @record.discussion.blank?
 
       .alert.alert-danger
         i.fa.fa-exclamation-circle
@@ -80,9 +80,12 @@ hr.divider
               = discussion.content.html_safe
 
 .btn-group
-  - if can? :edit, Record
+  - if current_user.admin? or @record.sector.short_name == current_user.sector.short_name
     = link_to 'Editar', edit_record_path(@record), class: 'btn btn-primary'
-  = link_to 'Voltar', records_path, class: 'btn btn-primary'
+  - if can? :destroy, Record
+    = link_to 'Excluir', @record, data: { confirm: 'Você tem certeza?' }, method: :delete,class: 'btn btn-default'
+
+= link_to 'Voltar', records_path, class: 'btn btn-default pull-right'
 
 javascript:
   $(document).ready( function () {

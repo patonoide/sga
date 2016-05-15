@@ -7,6 +7,7 @@ table.table.datatable
       th Nome
       th Email
       th Perfil
+      th Núcleo
       th
       th
 
@@ -17,7 +18,8 @@ table.table.datatable
       tr
         td = user.name
         td = user.email
-        td = user.try(:role).try(:name)
+        td = user.role.name
+        td = user.try(:sector).try(:short_name)
         td align="right"
           = link_to 'Editar', edit_user_path(user), data: { modal: true }
         td align="right"

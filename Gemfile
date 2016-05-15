@@ -43,10 +43,10 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'json'
 
-gem 'ckeditor'
+# Markdown Parser
+gem 'redcarpet'
 
-gem 'rails-html-sanitizer'
-
+# Gerador de aleatoriedades
 gem 'faker'
 
 gem 'bcrypt', '~> 3.1.7'

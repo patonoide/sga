@@ -2,21 +2,14 @@ class RecordsController < ApplicationController
 
   load_and_authorize_resource
 
-  respond_to :html, :js
-  before_action :set_record, only: [:show, 
-                                    :edit, 
-                                    :update, 
-                                    :destroy, 
+  respond_to :html, :js, :json
+  before_action :set_record, only: [:show, :edit, 
+                                    :update, :destroy, 
                                     :download]
 
   # GET /records
   def index
-  end
-
-  # POST /select_sector_records
-  def select_sector_records
-    @sector = Sector.find(params[:sector][:id])
-    session[:sector_id] = @sector.id
+    @records = Record.all.limit(5)
   end
 
   # GET /records/1/download
@@ -31,16 +24,7 @@ class RecordsController < ApplicationController
 
   # GET /records/new
   def new
-    @sector = Sector.find(params[:sector_id])
-    records = @sector.records
-
-    unless records.blank?
-      @number = records.last.number + 1
-    else
-      @number = 1
-    end
-
-    @record = Record.new(sector_id: params[:sector_id])
+    respond_modal_with @record = Record.new
   end
 
   # GET /records/1/edit
@@ -50,13 +34,15 @@ class RecordsController < ApplicationController
   # POST /records
   # POST /records.json
   def create
-    @sector = Sector.find(record_params[:sector_id])
     @record = Record.new(record_params)
-    @records = @sector.records
 
     respond_to do |format|
       if @record.save
-        format.html { redirect_to record_path(@record), notice: 'A ata foi criada com sucesso!' }
+        presente_id = Status.find_by(name: 'Presente').id
+        @record.sector.users.each do |user|
+          RecordsUser.create(user_id: user.id, record_id: @record.id, status_id: presente_id)
+        end
+        format.html { redirect_to edit_record_path(@record), notice: 'A ata foi criada com sucesso!' }
       end
     end
   end
@@ -75,9 +61,11 @@ class RecordsController < ApplicationController
   # DELETE /records/1
   # DELETE /records/1.json
   def destroy
-    @sector = @record.sector
-    @record.destroy
-    @records = @sector.records
+    respond_to do |format|
+      if @record.destroy
+        format.html { redirect_to records_path, notice: 'A ata foi excluída com sucesso!' }
+      end
+    end
   end
 
   private
@@ -91,8 +79,8 @@ class RecordsController < ApplicationController
       params.require(:record).permit(:date, 
              :sector_id,
              :number,
-             records_users_attributes: [:id, :user_id, :status_id, :_destroy],
-             discussions_attributes: [:id, :name, :content, :_destroy])
+             :discussion,
+             records_users_attributes: [:id, :user_id, :status_id, :_destroy])
     end
 
 end

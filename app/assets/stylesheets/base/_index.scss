@@ -1,10 +1,12 @@
+@import 'normalize';
 @import "bootstrap-sprockets";
-@import "bootswatch/sandstone/variables";
+// @import "bootswatch/sandstone/variables";
 @import "bootstrap";
-@import "bootswatch/sandstone/bootswatch";
+// @import "bootswatch/sandstone/bootswatch";
+
+@import 'flat-ui';
 
 @import 'bases';
-@import 'normalize';
 
 .container-unauthenticated {
   @extend .container;

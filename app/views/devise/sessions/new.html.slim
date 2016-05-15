@@ -1,4 +1,4 @@
-= content_for :text_logo, 'Entrar'
+= content_for :text_logo, 'SGA: Entrar'
 
 = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
 
@@ -14,9 +14,8 @@
         i.fa.fa-key
       = f.password_field :password, placeholder: 'Senha', class: 'form-control', required: true
 
-  = f.submit 'Entrar', class: 'btn btn-primary btn-block'
-
-br
-
-.text-center
-  = link_to 'Esqueci minha senha', new_user_password_path
+  .row
+    .col-sm-6.col-xs-12
+      = f.submit 'Entrar', class: 'btn btn-primary btn-block'
+    .col-sm-6.col-xs-12
+      = link_to 'Esqueci minha senha', new_user_password_path, class: 'btn btn-default btn-block'

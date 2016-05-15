@@ -2,16 +2,15 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users
-  resources :records, except: :new
+  resources :records
+
+  get '/sectors/:id/records' => 'sectors#records'
 
   devise_scope :user do
     get '/login' => 'devise/sessions#new'
     get '/logout' => 'devise/sessions#destroy'
   end
 
-  post '/records/:sector_id/new' => 'records#new', as: :new_record
-  post '/select_sector_records' => 'records#select_sector_records'
-  
   get '/records/:id/download' => 'records#download', as: :download
 
   root 'records#index'

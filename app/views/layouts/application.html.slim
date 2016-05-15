@@ -5,12 +5,13 @@ html
   head
     title
       | SGA
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"
     link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/t/bs/dt-1.10.11,r-2.0.2/datatables.min.css"
-    link rel="stylesheet" type="text/css" href="http://csshake.surge.sh/csshake.min.css"
+    link rel="stylesheet" href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     script type="text/javascript" src="https://cdn.datatables.net/t/bs/dt-1.10.11,r-2.0.2/datatables.min.js"
+    script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"
     = csrf_meta_tags
     meta name="viewport" content="width=device-width, initial-scale=1"
 
@@ -33,20 +34,3 @@ html
         = render 'layouts/header'
         = render 'layouts/flash'
         = yield
-
-        hr.divider
-          .row
-            .col-sm-6.col-xs-12
-              .hidden-xs
-                p.text-left
-                  | Sistema de Gerenciamento de Atas
-              .visible-xs
-                p.text-center
-                  | Sistema de Gerenciamento de Atas
-            .col-sm-6.col-xs-12
-              .hidden-xs
-                p.text-right
-                  | Empresa Júnior de Computação
-              .visible-xs
-                p.text-center
-                  | Empresa Júnior de Computação

@@ -1,78 +1,36 @@
-= content_for :text_logo, 'Nova Ata de Reunião'
-
-.row
-
-  .col-sm-12
-    .alert.alert-info
-      | Você está criando uma ata para o núcleo 
-      = '\'' + @sector.name + ' [' + @sector.short_name + '].\''
+= content_for :title, 'Nova Ata de Reunião'
 
 = form_for @record do |f|
+  
+  .modal-body
 
-  / Informações Básicas
-  .row
+    .row
 
-    .col-sm-12
-      h3 Informações Básicas
+      .col-sm-8.col-xs-12
+        .form-group
+          = f.label 'Núcleo'
+          - if current_user.admin?
+            = f.select :sector_id, Sector.all.map { |s| [s.name, s.id] }, {}, { class: 'form-control' }
+          - else
+            = f.hidden_field :sector_id, value: current_user.sector.id
+            = text_field_tag :dont_care, current_user.sector.name, class: 'form-control', disabled: true
 
-    .col-sm-12
-      hr.divider
+      .col-sm-4.col-xs-12
+        .form-group
+          = f.label 'Reunião de nº'
+          = f.number_field :number, value: @number, class:'form-control', required: true
+
+    .form-group
+      = f.label 'Data e Horário'
+      #datetimepicker.input-group.date
+        = f.text_field :date, class:'form-control', required: true
+        span.input-group-addon
+          span.glyphicon.glyphicon-calendar
     
-    .col-sm-12
+  .modal-footer
 
-      .form-group
-        = f.label 'Data e Horário'
-        #datetimepicker.input-group.date
-          = f.text_field :date, class:'form-control', required: true
-          span.input-group-addon
-            span.glyphicon.glyphicon-calendar
-      
-      .form-group
-        = f.label 'Reunião de nº'
-        = f.number_field :number, value: @number, class:'form-control', required: true
-      
-      = f.hidden_field :sector_id, value: @record.sector_id
-
-  / Membros
-  .row
-    
-    .col-sm-12
-      h3 Membros
-    
-    .col-sm-12
-      hr.divider
-
-  .row
-
-    .col-sm-12
-      = f.fields_for :records_users do |records_user|
-        = render 'records_user_fields', f: records_user
-      .links
-        = link_to_add_association 'Adicionar Membro', f, :records_users, class: 'btn btn-success'
-
-  / Pautas
-  .row
-    
-    div style="margin-top: 30px"
-      .col-sm-12
-        h3 Pautas
-    
-    .col-sm-12
-      hr.divider
-
-    .col-sm-12
-      = f.fields_for :discussions do |discussion|
-        = render 'discussion_fields', f: discussion
-      .links
-        = link_to_add_association 'Adicionar Pauta', f, :discussions, class: 'btn btn-success'
-
-  / Submit e voltar
-  .row
-    div style="margin-top: 40px"
-      .col-sm-12
-        .btn-group
-          = f.submit 'Salvar', class:'btn btn-primary'
-          = link_to 'Voltar', records_path, class:'btn btn-primary'
+    = f.submit 'Salvar', class:'btn btn-primary'
+    = link_to 'Voltar', records_path, class:'btn btn-default pull-left'
 
 javascript:
   $(document).ready(function() {

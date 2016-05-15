@@ -11,7 +11,7 @@ html {
 }
 
 body {
-  font-family: 'Lato';
+  font-size: 14px;
 }
 
 body.unauthenticated {
@@ -35,7 +35,11 @@ body.authenticated {
   background-color: white;
 }
 
-h1, h2, h3, h4 {
-  font-family: 'Lobster Two';
-  color: #515151;
+h1 {
+  font-size: 35px;
 }
+
+// h1, h2, h3, h4 {
+//   font-family: 'Lobster Two';
+//   color: #515151;
+// }

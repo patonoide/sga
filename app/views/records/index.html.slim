@@ -4,17 +4,32 @@
 
   = form_tag('/select_sector_records', remote: true) do
     
-    .col-sm-9.col-xs-7
+    .col-sm-9.col-xs-12
       = collection_select :sector, :id, Sector.all, 
-                          :id, :name, { prompt: false, 
+                          :id, :name, { prompt: 'Selecione um núcleo', 
                                         selected: session[:sector_id] },
-                          class:'form-control'
+                          class:'form-control', id: 'sector-select'
 
-    .col-sm-3.col-xs-5
-      = button_tag type: "submit", class: "btn btn-primary btn-block" do
-        i.fa.fa-search
-        | &nbsp;&nbsp;&nbsp;Buscar atas 
+    .col-sm-3.col-xs-12
+      = link_to 'Nova Ata', new_record_path, data: { modal: true }, class: 'btn btn-primary btn-block'
 
-#sector_records style="padding-top: 20px"
-  - unless session[:sector_id].nil?
-    = render 'sector_records', sector: @sector = Sector.find(session[:sector_id])
+.row style="margin-top: 20px"
+
+  .col-sm-12
+
+    #records
+      table.table
+        thead
+          tr
+            th Número
+            th Data
+            th Núcleo
+            th
+
+        tbody
+          - @records.each do |record|
+            tr
+              td = record.number
+              td = record.date
+              td = record.sector.name
+              td align="right" = link_to 'Visualizar Ata', record

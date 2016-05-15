@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
 
+  helper_method :redirect_to_root
+
   protect_from_forgery with: :null_session
   rescue_from CanCan::AccessDenied, with: :not_authorized
 
@@ -11,6 +13,11 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   include RecordsHelper
   include TimeHelper
+
+  def redirect_to_root
+    flash[:notice] = 'Você não possui autorização.'
+    redirect_to root_path
+  end
 
   def respond_modal_with(*args, &blk)
     options = args.extract_options!
