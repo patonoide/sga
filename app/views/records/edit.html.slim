@@ -3,6 +3,9 @@
 
 = content_for :text_logo, "#{@record.number}ª #{select_meeting_name(@record.sector.short_name)}"
 
+div#unique_id style="display: none"
+  = @record.unique_id
+
 = form_for @record do |f|
 
   / Informações Básicas
@@ -65,14 +68,17 @@
 
 javascript:
   $(document).ready(function() {
+
+    unique_id = $('#unique_id').html();
+
     var simplemde = new SimpleMDE({
       autofocus: true,
       autosave: {
           enabled: true,
-          uniqueId: "MyUniqueID",
+          uniqueId: unique_id,
           delay: 1000,
       },
-      placeholder: 'Digite aqui as pautas e discussões desta reunião...\n\nIt\'s markdown guy! Qualquer dúvida clique no ícone de ajuda :]',
+      placeholder: 'Digite aqui as pautas e discussões desta reunião...\n\nIt\'s markdown guys! Qualquer dúvida clique no ícone de ajuda :]',
       shortcuts: {
         drawTable: "Alt-Shift-T"
       },
@@ -80,7 +86,9 @@ javascript:
       spellChecker: false,
       status: ["autosave", "lines", "words", "cursor"]
     }); 
+
     $('#datetimepicker').datetimepicker({
       locale: 'pt-br'
     });
+
   });
