@@ -25,13 +25,15 @@ table.table.datatable
         td align="right"
           = link_to 'Excluir', user, data: { confirm: 'Você tem certeza?' }, method: :delete
 
-div style="padding-top: 50px"
-  = link_to 'Novo Usuário', new_user_path, class: 'btn btn-primary', data: { modal: true }
+br
+
+div style="padding-top: 60px"
+  = link_to 'Novo Usuário', new_user_path, class: 'btn btn-success', data: { modal: true }
 
 javascript:
   $(document).ready( function () {
     $('.datatable').DataTable({
-      'dom': '<"top">rt<"pull-left"f><"pull-right"p><"clear">',
+      'dom': '<"top">rt<"pull-left spacing"f><"pull-right spacing"p><"clear">',
       "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json"},
       responsive: true
     });

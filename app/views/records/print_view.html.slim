@@ -42,10 +42,13 @@ p
     | Pautas e discussão:
   br
   .panel.panel-default
-    .panel-body
+    .panel-body.markdown-content
       = markdown(@record.discussion)
 
-p.text-right
+span
+  = link_to 'Início', records_path
+
+span.pull-right
   em
     | Ata gerada por 
     = current_user.name + ' (' + current_user.email + ')'

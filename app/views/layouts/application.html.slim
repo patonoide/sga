@@ -17,7 +17,7 @@ html
 
   - if user_signed_in?
 
-    - if current_page?(print_view_path)
+    - if action_name == 'print_view'
 
       div style="margin-top: 50px; margin-bottom: 50px"
         .print-view-box.center-block
