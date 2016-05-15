@@ -57,27 +57,24 @@ hr.divider
               td = records_user.user.email
 .row
 
-  .col-sm-12
-    h4 Pautas
+  .col-sm-12 style="padding-top: 20px"
 
-  .col-sm-12 style="padding-top: 10px"
+    h4 Pautas e Discussões
 
-    - if @record.discussion.blank?
+    div style="padding-top: 10px"
 
-      .alert.alert-danger
-        i.fa.fa-exclamation-circle
-        | &nbsp;&nbsp; Não há pautas para esta reunião.       
+      - if @record.discussion.blank?
 
-    - else
+        .alert.alert-danger
+          i.fa.fa-exclamation-circle
+          | &nbsp;&nbsp; Não há pautas para esta reunião.       
+
+      - else
       
-      - @record.discussions.each do |discussion|
-
         .panel.panel-default
-          .panel-heading
-            = discussion.name
           .panel-body
             .text-justify
-              = discussion.content.html_safe
+              = @record.discussion
 
 .btn-group
   - if current_user.admin? or @record.sector.short_name == current_user.sector.short_name
@@ -90,7 +87,7 @@ hr.divider
 javascript:
   $(document).ready( function () {
     $('.datatable').DataTable({
-      'dom': '<"top">rt<"pull-left"f><"pull-right"p><"clear">',
+      'dom': '<"top">rt<"pull-left spacing"f><"pull-right spacing"p><"clear">',
       "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json"},
       responsive: true
     });

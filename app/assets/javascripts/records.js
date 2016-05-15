@@ -5,7 +5,7 @@ var populateTable = function(data) {
 
   if (data.length == 0) {
 
-    var alert = '<div class="alert alert-danger">Não há atas para o núcleo selecionado.</div>';
+    var alert = '<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;Não há atas para o núcleo selecionado.</div>';
     table_div.append(alert);
     table_div.hide().fadeIn('slow');
 
@@ -14,25 +14,37 @@ var populateTable = function(data) {
   else {
 
     var table = $('<table id="records-table"></table>').addClass('table');
-    var thead = '<thead><tr><th>Número</th><th>Data</th><th></th></tr></thead>';
+    var thead = '<thead><tr><th>Status</th><th>Número</th><th>Data</th><th></th></tr></thead>';
 
     table.append(thead)
 
     for (var i = 0; i < data.length; i++) {
 
       var row = $('<tr></tr>');
+
+      if (data[i].discussion || data[i].records_users.length == 0) {
+        var status = '<td><div class="label label-danger">Incompleta</div></td>';
+      }
+
+      else {
+        var status = '<td><div class="label label-danger">Completa</div></td>';
+      }
+
+      row.append(status);
+
       var content = '<td>' + data[i].number + '</td><td>' + data[i].date + '</td>';
       var link = "<td><a href=/records/" + data[i].id + ">Visualizar Ata</a></td>";
 
       row.append(content);
       row.append(link);
       table.append(row);
+
     }
 
     table_div.append(table);
 
     table.DataTable({
-      'dom': '<"top">rt<"pull-left"f><"pull-right"p><"clear">',
+      'dom': '<"top">rt<"pull-left spacing"f><"pull-right spacing"p><"clear">',
       "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json"},
       responsive: true
     });

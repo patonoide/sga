@@ -59,10 +59,9 @@
 
   / Submit e voltar
   .row
-    .col-sm-12
-      .btn-group
-        = f.submit 'Salvar', class:'btn btn-primary'
-        = link_to 'Voltar', records_path, class:'btn btn-primary'
+    .col-sm-12 style="margin-top: 10px"
+      = f.submit 'Salvar Ata', class:'btn btn-success'
+      = link_to 'Voltar', records_path, class:'btn btn-default pull-right'
 
 javascript:
   $(document).ready(function() {

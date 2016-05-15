@@ -1,1 +1,0 @@
-json.extract! @record, :id, :date, :number, :sector_id

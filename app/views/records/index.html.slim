@@ -11,7 +11,7 @@
                           class:'form-control', id: 'sector-select'
 
     .col-sm-3.col-xs-12
-      = link_to 'Nova Ata', new_record_path, data: { modal: true }, class: 'btn btn-primary btn-block'
+      = link_to 'Nova Ata', new_record_path, data: { modal: true }, class: 'btn btn-success btn-block'
 
 .row style="margin-top: 20px"
 
@@ -21,14 +21,26 @@
       table.table
         thead
           tr
+            th Status
             th Número
             th Data
             th Núcleo
             th
 
         tbody
+
           - @records.each do |record|
+          
             tr
+
+              td
+                - if record.discussion.blank? or record.users.empty?
+                  .label.label-danger
+                    | Incompleta
+                - else
+                  .label.label-success
+                    | Completa
+
               td = record.number
               td = record.date
               td = record.sector.name
