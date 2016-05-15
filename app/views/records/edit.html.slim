@@ -4,7 +4,7 @@
 = content_for :text_logo, "#{@record.number}ª #{select_meeting_name(@record.sector.short_name)}"
 
 div#unique_id style="display: none"
-  = @record.unique_id
+  = "ata_nucleo_#{@record.sector.id}_numero_#{@record.number}"
 
 = form_for @record do |f|
 

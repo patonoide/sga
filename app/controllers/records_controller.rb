@@ -46,7 +46,6 @@ class RecordsController < ApplicationController
         @record.sector.users.each do |user|
           RecordsUser.create(user_id: user.id, record_id: @record.id, status_id: presente_id)
         end
-        @record.update(unique_id: "id" + rand(1..200000).to_s)
         format.html { redirect_to edit_record_path(@record), notice: 'A ata foi criada com sucesso!' }
       end
     end
