@@ -33,7 +33,7 @@ var populateTable = function(data) {
       row.append(status);
 
       var content = '<td>' + data[i].number + '</td><td>' + data[i].date + '</td>';
-      var link = "<td><a href=/records/" + data[i].id + ">Visualizar Ata</a></td>";
+      var link = "<td align='right'><a href=/records/" + data[i].id + ">Visualizar Ata</a></td>";
 
       row.append(content);
       row.append(link);

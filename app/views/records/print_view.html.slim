@@ -17,33 +17,45 @@ p
   strong
     | Membros:
 
-  table.table
+  - if @record.records_users.empty?
+    p
+      | Não há membros para a reunião.
 
-    thead
-      tr
-        th Status
-        th Membro
-        th Email
+  - else
 
-    tbody
+    table.table
 
-      - @record.records_users.each do |records_user|
-
+      thead
         tr
-          td 
-            = status_tag(records_user.status.name)
-          td = records_user.user.name
-          td = records_user.user.email
+          th Status
+          th Membro
+          th Email
+
+      tbody
+
+        - @record.records_users.each do |records_user|
+
+          tr
+            td 
+              = status_tag(records_user.status.name)
+            td = records_user.user.name
+            td = records_user.user.email
 
 br
 
 p
   strong
-    | Pautas e discussão:
-  br
-  .panel.panel-default
-    .panel-body.markdown-content
-      = markdown(@record.discussion)
+    | Pautas e discussões:
+
+  - if @record.discussion.blank?
+    p
+      | Não há pautas e discussões para a reunião.
+      
+  - else
+    br
+    .panel.panel-default
+      .panel-body.markdown-content
+        = markdown(@record.discussion)
 
 span
   = link_to 'Início', records_path
