@@ -18,7 +18,7 @@
   .col-sm-12
 
     #records
-      table.table
+      table.table.dataTable
         thead
           tr
             th Status
@@ -45,3 +45,11 @@
               td = record.date
               td = record.sector.name
               td align="right" = link_to 'Visualizar Ata', record
+
+javascript:
+  $('.dataTable').DataTable({
+    'dom': '<"top">rt<"pull-left spacing"f><"pull-right spacing"p><"clear">',
+    "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json"},
+    "responsive": true,
+    "pageLength": 7
+  });

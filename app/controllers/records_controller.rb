@@ -9,7 +9,7 @@ class RecordsController < ApplicationController
 
   # GET /records
   def index
-    @records = Record.all.limit(5)
+    @records = Record.all.order(:updated_at)
   end
 
   # GET /records/1/download
