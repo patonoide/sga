@@ -27,8 +27,8 @@ nav.navbar.navbar-default.navbar-fixed-top
 
       ul.nav.navbar-nav.navbar-right
 
-        li.pull-right
-          = link_to 'Sair', logout_path
-
         li
           = link_to 'Editar Perfil', edit_user_path(current_user), data: { modal: true }
+
+        li
+          = link_to 'Sair', logout_path

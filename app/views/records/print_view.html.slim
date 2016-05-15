@@ -15,6 +15,14 @@ br
 
 p
   strong
+    | Data e Hora:
+p
+  = traduz_data_e_hora(@record.date.to_time)
+
+br
+
+p
+  strong
     | Membros:
 
   - if @record.records_users.empty?
@@ -63,4 +71,6 @@ span
 span.pull-right
   em
     | Ata gerada por 
-    = current_user.name + ' (' + current_user.email + ')'
+    = current_user.name
+    |  em 
+    = traduz_data_e_hora(Time.now)
