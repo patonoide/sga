@@ -17,13 +17,21 @@ html
 
   - if user_signed_in?
 
-    body.authenticated
-      #modal-holder
-      .container
-        = render 'layouts/navbar'
-        = render 'layouts/header'
-        = render 'layouts/flash'
-        = yield
+    - if current_page?(print_view_path)
+
+      div style="margin-top: 50px; margin-bottom: 50px"
+        .print-view-box.center-block
+          = yield
+
+    - else
+
+      body.authenticated
+        #modal-holder
+        .container
+          = render 'layouts/navbar'
+          = render 'layouts/header'
+          = render 'layouts/flash'
+          = yield
 
   - else
 

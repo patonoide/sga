@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
 
   get '/records/:id/download' => 'records#download', as: :download
+  get '/records/:id/print_view' => 'records#print_view', as: :print_view
 
   root 'records#index'
 

@@ -5,7 +5,7 @@ class RecordsController < ApplicationController
   respond_to :html, :js, :json
   before_action :set_record, only: [:show, :edit, 
                                     :update, :destroy, 
-                                    :download]
+                                    :download, :print_view]
 
   # GET /records
   def index
@@ -15,6 +15,10 @@ class RecordsController < ApplicationController
   # GET /records/1/download
   def download
     send_file view_context.download_record(@record)
+  end
+
+  # GET /records/1/print_view
+  def print_view
   end
 
   # GET /records/1

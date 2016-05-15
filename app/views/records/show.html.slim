@@ -19,7 +19,7 @@
       = render 'updated_at'
 
   .col-sm-2
-    = link_to 'Baixar como PDF', download_path(@record), class: 'btn btn-success pull-right'
+    = link_to 'Versão para Impressão', print_view_path(@record), class: 'btn btn-success pull-right'
 
 hr.divider
 
@@ -73,8 +73,8 @@ hr.divider
       
         .panel.panel-default
           .panel-body
-            .text-justify
-              = @record.discussion
+            .text-justify.markdown-content
+              = markdown(@record.discussion)
 
 .btn-group
   - if current_user.admin? or @record.sector.short_name == current_user.sector.short_name

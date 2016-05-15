@@ -3,12 +3,5 @@
 // @import "bootswatch/sandstone/variables";
 @import "bootstrap";
 // @import "bootswatch/sandstone/bootswatch";
-
 @import 'flat-ui';
-
 @import 'bases';
-
-.container-unauthenticated {
-  @extend .container;
-  width: 60%;
-}

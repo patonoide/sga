@@ -1,0 +1,51 @@
+.text-center
+  = image_tag('logo.png')
+
+br
+br
+
+p.text-center
+  strong
+    | ATA DE REUNIÃO
+    br
+    = @record.number.to_s + "ª " + select_meeting_name(@record.sector.short_name)
+
+br
+br
+
+p
+  strong
+    | Membros:
+
+  table.table
+
+    thead
+      tr
+        th Status
+        th Membro
+        th Email
+
+    tbody
+
+      - @record.records_users.each do |records_user|
+
+        tr
+          td 
+            = status_tag(records_user.status.name)
+          td = records_user.user.name
+          td = records_user.user.email
+
+br
+
+p
+  strong
+    | Pautas e discussão:
+  br
+  .panel.panel-default
+    .panel-body
+      = markdown(@record.discussion)
+
+p.text-right
+  em
+    | Ata gerada por 
+    = current_user.name + ' (' + current_user.email + ')'
