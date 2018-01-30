@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-ruby '2.3.0'
+ruby '2.3.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.6'
+gem 'rails', '4.2.7'
 
 # Use PostgreSQL as the database for Active Record
 gem 'pg'
@@ -63,7 +63,7 @@ end
 group :development, :test do
   gem 'byebug'
   gem 'mailcatcher'
-  gem 'rubocop', '~> 0.39.0', require: false
+  gem 'rubocop', '~> 0.49.0', require: false
 end
 
 group :development do
