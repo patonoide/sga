@@ -43,13 +43,13 @@ class RecordsController < ApplicationController
             respond_to do |format|
                 if @record.save
                     presente_id = Status.find_by(name: 'Presente').id
-                    faltou_id = Status.find_by(name:'Falta').id
-                    atrasou_id = Status.find_by(name:'Atraso').id
-                    if faltou_id!=nil || atrasou_id !=nil
-                         UserMailer.with(user: @user).welcome_email.deliver_now
-                    end
+
+
                     @record.sector.users.each do |user|
+
+
                         RecordsUser.create(user_id: user.id, record_id: @record.id, status_id: presente_id)
+
                     end
                     format.html { redirect_to edit_record_path(@record), notice: 'A ata foi criada com sucesso!' }
                 end
@@ -61,6 +61,34 @@ class RecordsController < ApplicationController
         def update
             respond_to do |format|
                 if @record.update_attributes(record_params)
+
+                    falta_id = Status.find_by(name: 'Falta').id
+                    atraso_id = Status.find_by(name: 'Atraso').id
+                    @records_user = RecordsUser.where(record_id: @record.id)
+                    admin  = User.all
+
+                    teste=0
+
+                    @records_user.each do |record_user|
+
+
+
+                        if record_user.status_id === falta_id || record_user.status_id === atraso_id
+
+                            admin.each do |admin|
+
+                                if admin.role_id ===1
+
+                                    EmailJob.perform_later(record_user.id,record_user.user_id,admin.email)
+
+                                end
+
+                            end
+
+                        end
+
+
+                    end
                     @record.update_attribute(:updated_at, Time.now)
                     format.html { redirect_to record_path(@record), notice: 'A ata foi atualizada com sucesso!' }
                 end

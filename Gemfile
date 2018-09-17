@@ -11,6 +11,9 @@ gem 'pg','~> 0.18'
 # Nested Forms
 gem 'cocoon'
 
+#Heroku
+gem 'figaro'
+
 # Geração de PDF
 gem 'prawn'
 gem 'prawn-table'

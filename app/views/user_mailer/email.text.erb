@@ -1,11 +1,3 @@
-Olá Diogo
+Olá
 
-
-    O membro: <%= @user.name %>
-
-     <% if faltou_id== nil && atrasou_id!=nil
-                status="Chegou atrasado"
-            end if faltou_id!= nil && atrasou_id==nil
-                status = "Faltou"
-            end%>
-            <%=status%>.
+O membro: <%= @user.name %>  <%= @msg%> para a reunião da <%=@sector%> no dia e hora <%=@date%>
