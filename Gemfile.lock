@@ -82,7 +82,13 @@ GEM
     execjs (2.7.0)
     faker (1.9.1)
       i18n (>= 0.7)
+
+    
+    figaro (1.1.1)
+      thor (~> 0.14)
+
     ffi (1.9.25)
+
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     i18n (0.9.5)
@@ -123,7 +129,9 @@ GEM
       ast (~> 2.4.0)
     pdf-core (0.7.0)
     pg (0.21.0)
+
     powerpack (0.1.2)
+
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
       ttfunk (~> 1.5)
@@ -267,6 +275,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   faker
+  figaro
   jbuilder (~> 2.0)
   jquery-rails
   json
@@ -296,4 +305,6 @@ RUBY VERSION
    ruby 2.3.6p384
 
 BUNDLED WITH
-   1.16.2
+
+   1.16.6
+
