@@ -6,10 +6,13 @@ ruby '2.3.6'
 gem 'rails', '4.2.7'
 
 # Use PostgreSQL as the database for Active Record
-gem 'pg'
+gem 'pg','~> 0.18'
 
 # Nested Forms
 gem 'cocoon'
+
+#Heroku
+gem 'figaro'
 
 # Geração de PDF
 gem 'prawn'

@@ -1,0 +1,22 @@
+<%= content_for :text_logo, 'Recuperar Senha' %>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+
+<div class ="form-group">
+    <div class="input-group">
+        <span class="input-group-addon">
+            <i class="fa fa-envelope"></i>
+        </span>
+            <%= f.email_field :email, autofocus: true, class: 'form-control', required: true %>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6 col-xs-12">
+        <%= f.submit 'Enviar instruções', class: 'btn btn-success btn-block'%>
+    </div>
+    <div class="col-sm-6 col-xs-12">
+        <%= link_to 'Ou login', '/login', class: 'btn btn-primary btn-block'%>
+    </div>
+</div>
+<% end %>
