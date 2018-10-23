@@ -1,0 +1,114 @@
+<% unless current_user.admin? or @record.sector.short_name == current_user.sector.short_name %>
+    <% redirect_to_root %>
+<% end %>
+
+<%= content_for :text_logo, "#{@record.number}ª #{select_meeting_name(@record.sector.short_name)}" %>
+
+<div id="unique_id" style="display: none">
+    <%= "ata_nucleo_#{@record.sector.id}_numero_#{@record.number}" %>
+</div>
+
+<%= form_for @record do |f| %>
+
+    <%-#Informações Básicas%>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="alert alert-info">
+                <% unless @record.updated_at.nil? %>
+                    <%= render 'updated_at' %>
+                <% end %>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <h4>Informações Básicas</h4>
+        </div>
+        <div class="col-sm-12">
+            <hr class="divider">
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <%= f.label 'Data e Horário' %>
+                <div id="datetimepicker" class="input-group date">
+                <%= f.text_field :date, class:'form-control', required: true %>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar">
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <% f.label 'Reunião de nº' %>
+                <% f.number_field :number, class:'form-control', required: true %>
+            </div>
+        </div>
+    </div>
+
+    <%-#Membros%> 
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Membros</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <%= f.fields_for :records_users do |records_user| %>
+                <%= render 'records_user_fields', f: records_user %>
+            <% end %>
+            <div class="links">
+                <%= link_to_add_association 'Adicionar Membro', f, :records_users, class: 'btn btn-success'%>
+            </div>
+        </div>
+    </div>
+
+    <%-#Pautas%>
+
+    <div class="row">
+        <div style="margin-top: 30px">
+            <div class="col-sm-12">
+                <h4>Pautas e Discussões</h4>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div style="margin-top: 20px">
+                <%= f.text_area :discussion %>
+            </div>
+        </div>
+    </div>
+
+    <%-#Submit e voltar%>
+
+
+    <div class="row">
+        <div class="col-sm-12" style="margin-top: 10px">
+            <%= f.submit 'Salvar Ata', class:'btn btn-success' %>
+            <%= link_to 'Voltar', records_path, class:'btn btn-default pull-right' %>
+        </div>
+    </div>
+<% end %>
+
+<script>
+  $(document).ready(function() {
+
+    unique_id = $('#unique_id').html();
+
+    var simplemde = new SimpleMDE({
+      autofocus: true,
+      autosave: {
+          enabled: true,
+          uniqueId: unique_id,
+          delay: 1000,
+      },
+      placeholder: 'Digite aqui as pautas e discussões desta reunião...\n\nIt\'s markdown guys! Qualquer dúvida clique no ícone de ajuda :]',
+      shortcuts: {
+        drawTable: "Alt-Shift-T"
+      },
+      showIcons: ["code", "table"],
+      spellChecker: false,
+      status: ["autosave", "lines", "words", "cursor"]
+    }); 
+    $('#datetimepicker').datetimepicker({
+      locale: 'pt-br'
+    });
+  });
+</script>

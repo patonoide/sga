@@ -1,0 +1,30 @@
+<div class="nested-fields" style="margin: 15px 0px 15px 0px">
+  <div class="row">
+    <div class="col-sm-6 col-xs-12">
+        <div class="form-group">
+            <%= f.label 'Nome do Membro' %>
+            <%= f.select :user_id, User.all.order(:name).map { |u| [u.name, u.id] },
+                { include_blank: 'Selecione o membro' },
+                { class: 'form-control' } %>
+        </div>
+    </div>
+
+    <div class="col-sm-4 col-xs-6">
+        <div class="form-group">
+            <%= f.label 'Status' %>
+            <%= f.select :status_id, Status.all.map { |s| [s.name, s.id] },
+                { }, { class:'form-control' } %>
+        </div>
+    </div>
+
+    <div class="col-sm-2 col-xs-6">
+        <div style="margin-top: 39px">
+            <%= link_to_remove_association f, class: 'btn btn-warning btn-block' do %>
+                Excluir Membro
+                &nbsp;&nbsp;
+                <i class="fa fa-times"></i>
+            <% end %>
+        </div>
+    </div>
+  </div>
+</div>

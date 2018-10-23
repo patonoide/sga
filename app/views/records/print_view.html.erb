@@ -1,0 +1,72 @@
+<div class="text-center">
+    <%= image_tag('logo.png') %>
+</div>
+
+<br>
+<br>
+
+<p class="text-center">
+    <strong>ATA DE REUNIÃO
+        <br>
+        <%= @record.number.to_s + "ª " + select_meeting_name(@record.sector.short_name) %>
+    </strong>
+</p>
+
+<br>
+<br>
+
+<p><strong>Data e Hora:</strong></p>
+
+<p><%= traduz_data_e_hora(@record.date.to_time) %></p>
+
+<br>
+
+<p>
+    <strong>Membros:</strong>
+    <% if @record.records_users.empty? %>
+        <p>Não há membros para a reunião.</p>
+    <% else %>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Status</th>
+                    <th>Membro</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @record.records_users.each do |records_user| %>
+                    <tr>
+                        <td><%= status_tag(records_user.status.name) %></td>
+                        <td><%= records_user.user.name %></td>
+                        <td><%= records_user.user.email %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    <% end %>
+</p>
+
+<br>
+
+<p>
+    <strong>Pautas e discussões:</strong>
+    <% if @record.discussion.blank? %>
+        <p>Não há pautas e discussões para a reunião.</p>
+    <% else %>
+        <br>
+        <div class="panel panel-default">
+            <div class="panel-body markdown-content">
+                <%= markdown(@record.discussion) %>
+            </div>
+        </div>
+    <% end %>
+</p>
+
+<span>
+    <%= link_to 'Início', records_path %>
+</span>
+
+<span class="pull-right">
+    <em>Ata gerada por <% current_user.name %> em <%= traduz_data_e_hora(Time.now)%> </em>
+</span>

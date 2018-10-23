@@ -1,0 +1,61 @@
+<%= content_for :text_logo, 'Sistema de Gerenciamento de Atas' %>
+
+<div class="row">
+    <%= form_tag('/select_sector_records', remote: true) do %>
+        <div class="col-sm-9 col-xs-12">
+            <%= collection_select :sector, :id, Sector.all, 
+                :id, :name, { prompt: 'Selecione um núcleo', 
+                            selected: session[:sector_id] },
+                class:'form-control', id: 'sector-select'%>
+        </div>
+        <div class="col-sm-3 col-xs-12">
+            <%= link_to 'Nova Ata', new_record_path, data: { modal: true }, class: 'btn btn-success btn-block' %>
+        </div>
+    <% end %>
+</div>
+<div class="row" style="margin-top: 20px">
+    <div class="col-sm-12">
+        <div id="records">
+            <table class="table dataTable">
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Número</th>
+                        <th>Data</th>
+                        <th>Núcleo</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @records.each do |record| %>
+                        <tr>
+                            <td>
+                                <% if (record.discussion.blank? or record.users.empty?) %>
+                                    <div class="label label-danger">
+                                        Incompleta
+                                    </div>
+                                <% else %>
+                                    <div class="label label-success">
+                                        Completa
+                                    </div>
+                                <% end %>
+                            </td>
+                            <td> <%= record.number %> </td>
+                            <td> <%= record.date %> </td>
+                            <td> <%= record.sector.name %> </td>
+                            <td><div style="align:right"> <%= link_to 'Visualizar Ata', record %> </div></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    $('.dataTable').DataTable({
+    'dom': '<"top">rt<"pull-left spacing"f><"pull-right spacing"p><"clear">',
+    "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json"},
+    "responsive": true,
+    "pageLength": 7
+  });
+</script>

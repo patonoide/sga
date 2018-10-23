@@ -1,0 +1,37 @@
+<%= content_for :title, 'Nova Ata de Reunião' %>
+<%= form_for @record do |f| %>
+
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-8 col-xs-12">
+            <div class="form-group">
+            <%= f.label 'Núcleo' %>
+            <% if current_user.admin? %>
+                <%= f.select :sector_id, Sector.all.map { |s| [s.name, s.id] }, {}, { class: 'form-control' } %>
+            <% else %>
+                <%= f.hidden_field :sector_id, value: current_user.sector.id %>
+                <%= text_field_tag :dont_care, current_user.sector.name, class: 'form-control', disabled: true %>
+            <% end %>
+            </div>
+        </div>
+
+        <div class="col-sm-8 col-xs-12">
+            <div class="form-group">
+                <%= f.label 'Reunião de nº' %>
+                <%= f.number_field :number, value: @number, class:'form-control', required: true %>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <%= f.submit 'Criar', class:'btn btn-success' %>
+    </div>
+</div>
+<% end %>
+<script>
+  $(document).ready(function() {
+    $('#datetimepicker').datetimepicker({
+      locale: 'pt-br'
+    });
+  });
+</script>

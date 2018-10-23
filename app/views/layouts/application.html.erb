@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SGA</title>
+        <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/t/bs/dt-1.10.11,r-2.0.2/datatables.min.css">
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+        <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+        <script>
+            javascript_include_tag 'application', 'data-turbolinks-track' => true
+        </script>
+        <script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+        <%= csrf_meta_tags %>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <% if user_signed_in? %>
+        <% if action_name == 'print_view' %>
+            <div style="margin-top: 50px; margin-bottom: 50px">
+                <div class="print-view-box center-block">
+                    <%= yield %>
+                </div>
+            </div>
+        <% else %>
+            <body class="authenticated">
+                <div id="modal-holder">
+                    <div class="container">
+                        <%= render 'layouts/navbar' %>
+                        <%= render 'layouts/header' %>
+                        <%= render 'layouts/flash' %>
+                        <%= yield %>
+                    </div>
+                </div>
+            </body>
+        <% end %>
+    <% else %>
+        <body class="unauthenticated">
+            <div class="unauthenticated-box center-block">
+                <%= render 'layouts/header' %>
+                <%= render 'layouts/flash' %>
+                <%= yield %>
+            </div>
+        </body>
+    <% end %>
+</html>

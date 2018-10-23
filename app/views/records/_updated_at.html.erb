@@ -1,0 +1,10 @@
+<% unless @record.updated_at.nil? %>
+    <div class="visible-xs">
+        <div class=text-center>
+            <%= 'Última atualização em ' + traduz_data_e_hora(@record.updated_at - 60 * 60 * 3) %>
+        </div>
+    </div>
+    <div class="hidden-xs">
+        <%= 'Última atualização em ' + traduz_data_e_hora(@record.updated_at - 60 * 60 * 3) %>
+    </div>
+<% end %>
