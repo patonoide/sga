@@ -1,6 +1,6 @@
 var populateTable = function(data) {
 
-  table_div = $('#records');
+  table_div = $('records');
   table_div.empty();
 
   if (data.length == 0) {
