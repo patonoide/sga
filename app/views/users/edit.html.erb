@@ -1,0 +1,6 @@
+<% unless @user == current_user or current_user.admin?%>
+	<% not_authorized %>
+<% else %>
+	<%= content_for :title, 'Editar Usuário'%>
+	<%= render 'form'%>
+<% end %>
