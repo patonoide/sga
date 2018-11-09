@@ -1,0 +1,59 @@
+<%= form_for @user do |f|%>
+<div class="modal-body">
+	<div class="row">
+		<div class="col-sm-6 col-xs-12">
+			<div class="form-group">
+				<%= f.label 'Nome' %>
+				<%= f.text_field :name, class: 'form-control', required: true %>
+			</div>
+		</div>
+		<div class="col-sm-6 col-xs-12">
+			<div class="form-group">
+				<%= f.label 'Email' %>
+				<% if current_user.admin?%>
+					<%= f.email_field :email, class: 'form-control', required: true %>
+				<%else%>
+					<%= f.email_field :email, class: 'form-control', required: true, disabled: true %>
+				<%end%>
+			</div>
+		</div>
+	</div>
+	<% if current_user.admin? %>
+		<div class="row">
+				<div class="col-sm-4 col-xs-12">
+					<div class="form-group">
+						<%= f.label 'Perfil' %>
+						<%= f.select :role_id, Role.all.map { |r| [r.name, r.id] }, 
+										{ include_blank: 'Selecione o perfil' },
+										{ class: 'form-control', required: true }%>
+					</div>
+				</div>		
+			<div class="col-sm-8 col-xs-12">
+				<div class="form-group">
+					<%= f.label 'Núcleo' %>
+					<%= f.select :sector_id, Sector.all.map { |s| [s.name, s.id] }, 
+                                 { include_blank: 'Selecione o núcleo' },
+                                 { class: 'form-control', required: true }%>
+				</div>
+			</div>
+		</div>
+	<%end%>
+		<div class="row">
+			<div class="col-sm-6 col-xs-12">
+				<div class="form-group">
+					<%= f.label 'Senha' %>
+					<%= f.password_field :password, class: 'form-control'%>
+				</div>
+			</div>
+			<div class="col-sm-6 col-xs-12">
+				<div class="form-group">
+					<%= f.label 'Confirmação de Senha'%>
+					<%= f.password_field :password_confirmation, class: 'form-control' %>
+				</div>
+			</div>
+		</div>
+</div>
+<div class="modal-footer">
+	<%= f.submit 'Salvar', class: 'btn btn-primary'%>
+</div>
+<%end%>

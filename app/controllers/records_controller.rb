@@ -9,7 +9,7 @@ class RecordsController < ApplicationController
 
         # GET /records
         def index
-            @records = Record.all.order(:updated_at)
+            @records = Record.all.order("date DESC")
         end
 
         # GET /records/1/download
