@@ -3,20 +3,20 @@
 <div class="row">
     <%= form_tag('select_sector_records', remote: true) do %>
         <div class="col-sm-9 col-xs-12">
-            <%= collection_select :sector, :id, Sector.all, 
-                :id, :name, { prompt: 'Selecione um núcleo', 
+            <%= collection_select :sector, :id, Sector.all,
+                :id, :name, { prompt: 'Selecione um núcleo',
                             selected: session[:sector_id] },
                 class:'form-control', id: 'sector-select'%>
         </div>
         <div class="col-sm-3 col-xs-12">
-            <%= link_to 'Nova Ata', new_record_path, data: { modal: true }, class: 'btn btn-success btn-block' %>
+            <%= link_to 'Nova Ata', new_record_path , class: 'btn btn-success btn-block' %>
         </div>
     <% end %>
 </div>
 <div class="row" style="margin-top: 20px">
     <div class="col-sm-12">
         <div id="records">
-            <table class="table dataTable">
+            <table class="table " id="dataTable">
                 <thead>
                     <tr>
                         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 102px;" aria-label="Status: activate to sort column ascending">Status</th>
@@ -52,7 +52,9 @@
     </div>
 </div>
 <script>
-$('.dataTable').DataTable({
+
+    $('#dataTable').DataTable({
+
     'dom': '<"top">rt<"pull-left spacing"f><"pull-right spacing"p><"clear">',
     "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json"},
     "responsive": true,
