@@ -1,0 +1,32 @@
+<%= content_for :text_logo, 'Usuários'%>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Nome</th>
+    	<th scope="col">Email</th>
+   		<th scope="col">Perfil</th>
+   		<th scope="col">Núcleo</th>
+   		<th></th>
+   		<th></th>
+    </tr>
+  </thead>
+  <tbody>
+  	<% @users.each do |user|%>
+    <tr>
+      	<th scope="row"><%= user.name %></th>
+      	<td><%= user.email%></td>
+    	<td><%= user.role.name%></td>
+    	<td><%= user.try(:sector).try(:short_name)%></td>
+    	<td align="right"><%= link_to 'Editar', edit_user_path(user), data: { modal: true }%></td>
+    	<td align="right"><%= link_to 'Excluir', user, data: { confirm: 'Você tem certeza?' }, method: :delete%></td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>
+
+<br>
+
+<div style="padding-top: 60px">
+	<%= link_to 'Novo Usuário', new_user_path, class: 'btn btn-success', data: { modal: true }%>
+</div>
