@@ -18,7 +18,7 @@
       	<td><%= user.email%></td>
     	<td><%= user.role.name%></td>
     	<td><%= user.try(:sector).try(:short_name)%></td>
-    	<td align="right"><%= link_to 'Editar', edit_user_path(user), data: { modal: true }%></td>
+    	<td align="right"><%= link_to 'Editar', edit_user_path(user)%></td>
     	<td align="right"><%= link_to 'Excluir', user, data: { confirm: 'Você tem certeza?' }, method: :delete%></td>
     </tr>
     <%end%>
@@ -28,5 +28,5 @@
 <br>
 
 <div style="padding-top: 60px">
-	<%= link_to 'Novo Usuário', new_user_path, class: 'btn btn-success', data: { modal: true }%>
+	<%= link_to 'Novo Usuário', new_user_path, class: 'btn btn-success'%>
 </div>
